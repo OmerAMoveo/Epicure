@@ -1,6 +1,8 @@
-import { default as searchIcon } from '../images/search-icon.svg'
+import { default as searchIcon } from '../../images/search-icon.svg'
+
 import styled from 'styled-components';
 import { colors } from '../../GlobalStyle'
+
 const StyledSearchBar = styled.input`
   width: 415px;
   height: 34px;
@@ -14,7 +16,8 @@ const StyledSearchBar = styled.input`
 
 const SearchBar: React.FC = () => {
     return (
-        <StyledSearchBar type='search' placeholder='Search for restaurant, cuisine, chef'></StyledSearchBar>
+        // <StyledSearchBar type='search' placeholder='Search for restaurant, cuisine, chef'></StyledSearchBar>
+        <img src={searchIcon} className='icon-set-1' id='search' alt='mini logo' />
     );
 }
 
