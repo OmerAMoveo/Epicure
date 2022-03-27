@@ -5,6 +5,7 @@ import { default as cartIcon } from '../images/cart-icon.svg'
 import { default as userIcon } from '../images/user-icon.svg'
 import { default as miniLogo } from '../images/epicure-mini-logo.png'
 import { default as opeiningMenu } from '../images/opening-menu-icon.svg'
+
 const StyledBar = styled.div`
     display: flex;
     justify-content: space-between;
@@ -17,25 +18,23 @@ const StyledBar = styled.div`
 
     & section {
         flex-grow: 1;
+        
         &.center {
+            justify-content: center;
             flex-grow:0;
             flex-grow: 3;
         }
 
         & img{    
-        width: 31px;
-        height: 31px;
+            width: 31px;
+            height: 31px;
 
             &.icon-set-1 {
                 width: 18px;
                 height: 18px;
-            }
-
-        
-    }
-    
-        
-    }
+            }     
+    }       
+}
 `
 
 const MainNavigation: React.FC = () => {

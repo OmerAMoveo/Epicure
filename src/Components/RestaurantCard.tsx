@@ -1,3 +1,4 @@
+import React from "react";
 import { restaurant } from "../mockDB/MockDB"
 import styled from "styled-components";
 import { colors } from "../GlobalStyle";
@@ -13,13 +14,15 @@ type Props = {
     restaurant: restaurant,
 }
 
-const RestaurantCart: React.FC<Props> = (props: Props) => {
+const RestaurantCard: React.FC<Props> = (props: Props) => {
 
     return (
         <RestaurantCardDiv>
             <img src={props.restaurant.smallImage} />
+            <p>{props.restaurant.name}</p>
+            <p>{props.restaurant.chef}</p>
         </RestaurantCardDiv>
     );
 }
 
-export default RestaurantCart;
+export default RestaurantCard;
