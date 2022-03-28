@@ -7,6 +7,7 @@ import { default as searchIcon } from '../../images/search-icon.svg'
 const StyledRectangle = styled.div`
     display: flex;
     justify-items: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 269px;
     background-image: url(${mainImage});
@@ -14,11 +15,10 @@ const StyledRectangle = styled.div`
 
     & div {        
         &.middleBar{
-            width: 335px;
             height: 125px;
-            padding: 18px 33px 22px;
-            margin-left:20px;
-            margin-right:20px;
+            padding: 20px;
+            margin-left:0px;
+            margin-right:0px;
             background-color: rgba(255,255,255,0.88);
 
             & p {

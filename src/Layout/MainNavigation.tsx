@@ -12,17 +12,15 @@ const StyledBar = styled.div`
     align-items: center;
     width: 100%;
     height: 45px;
-    padding: 8px 20px 7px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     background-color: white;
 
     & section {
         flex-grow: 1;
-        
-        &.center {
-            justify-content: center;
-            flex-grow:0;
-            flex-grow: 3;
+        display: flex;
+        justify-content: space-evenly;
+        &.center {            
+            flex-grow: 2;
         }
 
         & img{    
