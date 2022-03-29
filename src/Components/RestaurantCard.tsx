@@ -61,7 +61,7 @@ const RestaurantCard: React.FC<Props> = (props: Props) => {
 
     return (
         <RestaurantCardDiv>
-            <img src={props.restaurant.smallImage} />
+            <img src={props.restaurant.smallImage} alt={`${props.restaurant.smallImage}`} />
             <section>
                 <h1>{props.restaurant.name}</h1>
                 <h2>{props.restaurant.chef}</h2>

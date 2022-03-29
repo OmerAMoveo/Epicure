@@ -167,7 +167,7 @@ export const Restaurants: restaurant[] = [
 ]
 
 //Dishes:
-export const Dishes: dish[] = [
+export const dishes: dish[] = [
     {
         name: 'Pad Ki Mao',
         restaurantId: 1,
@@ -409,6 +409,10 @@ export const Dishes: dish[] = [
 //functions:
 export const getRestaurants = () => {
     return Restaurants;
+}
+
+export const getDishes = () => {
+    return dishes;
 }
 
 export const selectCommentIcon = (dishComment: Comment) => {

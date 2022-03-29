@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { colors } from "../GlobalStyle";
-import { dish } from "../mockDB/MockDB";
-import { selectCommentIcon } from "../mockDB/MockDB";
-import { default as ilsIcon } from '../images/ils.svg'
+import { colors } from "../../GlobalStyle";
+import { dish } from "../../mockDB/MockDB";
+import { selectCommentIcon } from "../../mockDB/MockDB";
+import { default as ilsIcon } from '../images/ils.svg';
 
 const StarDishDiv = styled.div`
     width: 259.2px;
