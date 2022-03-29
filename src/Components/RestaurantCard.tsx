@@ -12,7 +12,7 @@ const RestaurantCardDiv = styled.div`
     flex: 0 0 auto;
     flex-direction: column;
     text-align:center;
-    background-color: ${colors.beige};   
+    background-color: ${colors.light_tan};   
 
     & img {
         width: 206px;

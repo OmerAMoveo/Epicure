@@ -68,8 +68,8 @@ const RectangleBar: React.FC = () => {
             <div className='middleBar'>
                 <p className='epicure-description'>Epicure works with the top chef restaurants in Tel Aviv</p>
                 <div className='search-box'>
-                    <img src={searchIcon} alt="search-icon"/>
-                    <input placeholder='Serch for restaurant cuisine, chef'></input>
+                    <img src={searchIcon} alt="search-icon" />
+                    <input placeholder='Search for restaurant cuisine, chef'></input>
                 </div>
             </div>
         </StyledRectangle>

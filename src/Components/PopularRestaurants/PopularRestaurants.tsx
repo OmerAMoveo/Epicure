@@ -1,42 +1,40 @@
 import RestaurantCard from "../RestaurantCard";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getRestaurants, restaurant } from "../../mockDB/MockDB";
+
 
 const WrapperDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    & h3{
-        white-space: nowrap;
-        height: 22px;
-        margin-bottom: 40px;
-        margin-top: 20px;
-        font-family: HelveticaNeue;
-        font-size: 15px;
-        font-weight: 100;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: 1.57;
-        letter-spacing: 0.93px;
-        text-align: center;
-        color: black;
-    }
+    margin-bottom : 50px;
+    overflow-x: scroll;
+    overflow-y: hidden;
 
     & div{
         &.scrolling-wrapper {
-            overflow-x: scroll;
-            overflow-y: hidden;
             white-space: nowrap;
-            border: solid red;
          }
 
          &.card {
             display: inline-block;
-            border: solid blue;
          }
     }
+`
+
+export const CenteredH3 = styled.h3`
+    align-self: center;
+    white-space: nowrap;
+    height: 17px;
+    font-family: HelveticaNeue;
+    font-size: 14px;
+    font-weight: 100;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.93px;
+    color: black;
 `
 
 
@@ -52,18 +50,24 @@ const PopularRestaurants: React.FC = () => {
     }, []);
 
 
-    const mapFavorites = () => {
+
+    const mapFavorites = useCallback(() => {
         return favoriteRestaurants.map(singleRestaurant => {
-            console.log(singleRestaurant);
-            return <div className="card"><RestaurantCard restaurant={singleRestaurant} key={singleRestaurant.id} /></div>
+            return (
+                <div className="card" key={singleRestaurant.name}>
+                    <RestaurantCard restaurant={singleRestaurant} key={singleRestaurant.name} />
+                </div>
+            );
         });
-    }
+    }, [favoriteRestaurants])
 
     return (
-        <WrapperDiv>
-            <h3>THE POPULAR RESTAURANT IN EPICURE:</h3>
-            <div className="scrolling-wrapper">{mapFavorites()}</div>
-        </WrapperDiv>
+        <>
+            <CenteredH3>THE POPULAR RESTAURANT IN EPICURE:</CenteredH3>
+            <WrapperDiv>
+                <div className="scrolling-wrapper">{mapFavorites()}</div>
+            </WrapperDiv>
+        </>
     );
 }
 
