@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components'
 import SearchBar from '../Components/SearchBar.tsx/SearchBar';
 import { default as cartIcon } from '../images/cart-icon.svg'
 import { default as userIcon } from '../images/user-icon.svg'
 import { default as miniLogo } from '../images/epicure-mini-logo.png'
-import { default as opeiningMenu } from '../images/opening-menu-icon.svg'
+import { default as hamburger } from '../images/opening-menu-icon.svg'
 
 const StyledBar = styled.div`
     display: flex;
@@ -34,22 +34,33 @@ const StyledBar = styled.div`
     }       
 }
 `
+type Props = {
+    hamburgerClicked: boolean,
+    setHamburgerClicked: Dispatch<SetStateAction<boolean>>
+}
 
-const MainNavigation: React.FC = () => {
+const MainNavigation: React.FC<Props> = (props) => {
+
+    const hamburgerClickedHandler = () => {
+        props.setHamburgerClicked(!props.hamburgerClicked);
+    }
+
     return (
-        <StyledBar>
-            <section>
-                <img src={opeiningMenu} className='icon-set-1' id='icon' alt='mini logo' />
-            </section>
-            <section className='center'>
-                <img src={miniLogo} alt='mini logo' />
-            </section>
-            <section>
-                <SearchBar />
-                <img src={cartIcon} className='icon-set-1' id='cart' alt='mini logo' />
-                <img src={userIcon} className='icon-set-1' id='user' alt='mini logo' />
-            </section>
-        </StyledBar>
+        <>
+            <StyledBar>
+                <section>
+                    <img src={hamburger} className='icon-set-1' id='icon' alt='menu' onClick={hamburgerClickedHandler} />
+                </section>
+                <section className='center'>
+                    <img src={miniLogo} alt='mini logo' />
+                </section>
+                <section>
+                    <SearchBar />
+                    <img src={cartIcon} className='icon-set-1' id='cart' alt='cart' />
+                    <img src={userIcon} className='icon-set-1' id='user' alt='user' />
+                </section>
+            </StyledBar>
+        </>
     );
 }
 

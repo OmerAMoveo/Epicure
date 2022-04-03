@@ -5,6 +5,9 @@ import { selectCommentIcon } from "../../mockDB/MockDB";
 import { default as ilsIcon } from '../../images/ils.svg';
 
 const StarDishDiv = styled.div`
+    display: flex;
+    /* flex-direction: column; */
+    flex-flow: column wrap;
     width: 259.2px;
     height: 470.9px;
     background-color: ${colors.light_tan};
@@ -34,14 +37,11 @@ const StarDishDiv = styled.div`
         &.price-section{
             display: flex;
             flex-direction: row;
-            width: 100%;
             justify-content: space-between;
             align-content: flex-end;
             border:solid;     
-                   
         }      
     }
-
 `
 type Props = {
     dish: dish
