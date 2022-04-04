@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import DishCard from "../DishCard/DishCard";
 import { getDishes, getRestaurants } from "../../mockDB/MockDB";
-import { useCallback } from "react";
+import { DetailedHTMLProps, MouseEventHandler, TdHTMLAttributes, useCallback, useMemo, useState } from "react";
+import FloatingDish from "../FloatingDish/FloatingDish";
 
 const StyledTable = styled.table`
     display: table;
@@ -45,19 +46,32 @@ const StyledPopularDishes = styled.div`
 `
 
 const PopularDishes: React.FC = () => {
-
+    const [showDish, setShowDish] = useState(false);
+    const [dishDetailes, setDishDetails] = useState(null)
+    const memoizedRestaurants = useMemo(() => { return getRestaurants() }, [])
     //on real-version: randomize x restaurants for mapping if it's okay for Shilo
+
+    const dishClickedHandler = (event: MouseEventHandler<HTMLTableDataCellElement>) => {
+        console.log();
+
+    }
+
     const dishesTableHeader = useCallback(() => {
-        const uniqueRestaurants = getRestaurants();
-        return uniqueRestaurants.map(singleRestaurant => <th key={singleRestaurant.id}>{singleRestaurant.name}</th>)
+        return memoizedRestaurants.map(singleRestaurant => <th key={singleRestaurant.id}>{singleRestaurant.name}</th>)
     }, []);
 
     const dishTableCards = useCallback(() => {
         const uniqueRestaurants = getDishes();
-        return uniqueRestaurants.map(singleDish => singleDish.isSignatureDish ? <td key={singleDish.restaurantId}><DishCard dish={singleDish} /></td> : null)
+        return uniqueRestaurants.map(singleDish => singleDish.isSignatureDish ?
+            <td key={singleDish.restaurantId}
+                id={singleDish.restaurantId.toString()}
+                onClick={dishClickedHandler} >
+                <div><DishCard dish={singleDish} /></div>
+            </td> : null)
     }, []);
     return (
         <>
+            {dishDetailes && <FloatingDish xClicked={showDish} setXClicked={setShowDish} dish={getDishes()[1]} />}
             <CenteredH3>SIGNATURE DISH OF:</CenteredH3>
             <StyledPopularDishes>
                 <StyledTable>

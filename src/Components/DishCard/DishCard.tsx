@@ -24,7 +24,6 @@ const StarDishDiv = styled.div`
 
         &.comment-image {
             border:solid;
-            width: 259.2px;
             margin-left: auto; 
             margin-right: auto;
             bottom: 80px;
@@ -41,6 +40,14 @@ const StarDishDiv = styled.div`
             align-content: flex-end;
             border:solid;     
         }      
+    }
+
+    & div.empty-box{
+        margin-left: auto; 
+        margin-right: auto;
+        bottom: 80px;
+        width: 39px;
+        height: 30px;
     }
 `
 type Props = {
@@ -59,7 +66,7 @@ const DishCard: React.FC<Props> = (props) => {
                 <h1>{props.dish.name}</h1>
                 <p className="description">{mapIngredients()}</p>
             </article>
-            {props.dish.comment ? <img src={selectCommentIcon(props.dish.comment)} className="comment-image" alt={props.dish.comment.toString()} /> : <div />}
+            {props.dish.comment ? <img src={selectCommentIcon(props.dish.comment)} className="comment-image" alt={props.dish.comment.toString()} /> : <div className="empty-box" />}
             <section className="price-section">
                 <div className="line-4" />
                 <div className="price">
