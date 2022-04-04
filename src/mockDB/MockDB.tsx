@@ -1,3 +1,16 @@
+import { default as claroimage } from '../images/claro-small-image.png'
+import { default as tigerliliimage } from '../images/tiger-lili-small-image.png'
+import { default as luminaimage } from '../images/lumina-small-image.png'
+import { default as kaltzone } from '../images/Kaltzone.png'
+import { default as garbanzoPrito } from '../images/garbanzo-prito-image.png'
+import { default as gespacho } from '../images/gespacho-image.png'
+import { default as padkimao } from '../images/pad-ki-mao-image.png'
+import { default as redfarm } from '../images/red-farm-image.png'
+import { default as smokedpizza } from '../images/smoked-pizza-image.png'
+import { default as spicyIcon } from '../images/spicy-icon.svg'
+import { default as vegetarianIcon } from '../images/vegetarian-icon.svg'
+import { default as veganIcon } from '../images/vegan-icon.svg'
+
 // Types:
 export type restaurant = {
     name: string,
@@ -25,6 +38,7 @@ export enum Comment {
     vegan,
 }
 
+
 export type dish = {
     name: string,
     restaurantId: number,
@@ -34,6 +48,8 @@ export type dish = {
     comment: null | Comment,
     sides: string[],
     changes: string[],
+    isSignatureDish: boolean,
+    image: string,
 }
 
 export type chef = {
@@ -41,7 +57,6 @@ export type chef = {
     description: string,
     image: string,
 }
-
 
 //Mock data:
 //Restaurants:
@@ -60,7 +75,7 @@ export const Restaurants: restaurant[] = [
             'Red Farm',
         ],
         bigImage: '',
-        smallImage: '',
+        smallImage: claroimage,
         rating: 8.8,
     },
 
@@ -77,7 +92,7 @@ export const Restaurants: restaurant[] = [
             'Piree`',
         ],
         bigImage: '',
-        smallImage: '',
+        smallImage: luminaimage,
         rating: 8.5,
     },
 
@@ -94,7 +109,7 @@ export const Restaurants: restaurant[] = [
             'Sandwich Sushi',
         ],
         bigImage: '',
-        smallImage: '',
+        smallImage: tigerliliimage,
         rating: 8.5,
     },
 
@@ -152,7 +167,7 @@ export const Restaurants: restaurant[] = [
 ]
 
 //Dishes:
-export const Dishes: dish[] = [
+export const dishes: dish[] = [
     {
         name: 'Pad Ki Mao',
         restaurantId: 1,
@@ -169,6 +184,8 @@ export const Dishes: dish[] = [
         comment: Comment.spicy,
         sides: ['White Bread', 'Sticky Rice',],
         changes: ['Without Peanuts', 'Sticky Rice'],
+        isSignatureDish: true,
+        image: padkimao,
     },
     {
         name: 'Ta Ma-La-Ko',
@@ -186,6 +203,8 @@ export const Dishes: dish[] = [
         comment: Comment.spicy,
         sides: ['Sticky Rice',],
         changes: ['Without Peanuts', 'Sticky Rice'],
+        isSignatureDish: false,
+        image: padkimao,
     },
     {
         name: 'Red Farm',
@@ -202,6 +221,8 @@ export const Dishes: dish[] = [
         comment: null,
         sides: ['Sticky Rice',],
         changes: ['Without Peanuts', 'Sticky Rice'],
+        isSignatureDish: false,
+        image: redfarm,
     },
 
     {
@@ -219,6 +240,8 @@ export const Dishes: dish[] = [
         comment: null,
         sides: ['Sticky Rice',],
         changes: ['Without Peanuts', 'Sticky Rice'],
+        isSignatureDish: true,
+        image: redfarm,
     },
 
     {
@@ -233,6 +256,8 @@ export const Dishes: dish[] = [
         comment: null,
         sides: [],
         changes: ['Without butter'],
+        isSignatureDish: false,
+        image: kaltzone,
     },
 
     {
@@ -251,6 +276,8 @@ export const Dishes: dish[] = [
         comment: Comment.spicy,
         sides: [],
         changes: ['Without peanuts', 'No lemon', 'No Egg'],
+        isSignatureDish: true,
+        image: padkimao,
     },
 
     {
@@ -269,6 +296,8 @@ export const Dishes: dish[] = [
         comment: Comment.spicy,
         sides: [],
         changes: ['Without peanuts', 'No lemon', 'No Egg'],
+        isSignatureDish: false,
+        image: garbanzoPrito,
     },
 
     {
@@ -284,6 +313,8 @@ export const Dishes: dish[] = [
         comment: Comment.spicy,
         sides: [],
         changes: [],
+        isSignatureDish: true,
+        image: smokedpizza,
     },
     {
         name: 'Ravioli',
@@ -299,6 +330,8 @@ export const Dishes: dish[] = [
         comment: null,
         sides: [],
         changes: ['More parmagane'],
+        isSignatureDish: false,
+        image: smokedpizza,
     },
 
     {
@@ -314,6 +347,8 @@ export const Dishes: dish[] = [
         comment: null,
         sides: [],
         changes: [],
+        isSignatureDish: false,
+        image: kaltzone,
     },
 
     {
@@ -328,6 +363,8 @@ export const Dishes: dish[] = [
         comment: null,
         sides: [],
         changes: [],
+        isSignatureDish: true,
+        image: gespacho,
     },
 
     {
@@ -343,6 +380,8 @@ export const Dishes: dish[] = [
         comment: Comment.spicy,
         sides: [],
         changes: [],
+        isSignatureDish: true,
+        image: smokedpizza,
     },
 
     {
@@ -361,5 +400,24 @@ export const Dishes: dish[] = [
         comment: Comment.spicy,
         sides: [],
         changes: ['Without peanuts', 'No lemon', 'No Egg'],
+        isSignatureDish: false,
+        image: redfarm,
     },
 ]
+
+
+//functions:
+export const getRestaurants = () => {
+    return Restaurants;
+}
+
+export const getDishes = () => {
+    return dishes;
+}
+
+export const selectCommentIcon = (dishComment: Comment) => {
+    if (dishComment === Comment.spicy) return spicyIcon;
+    if (dishComment === Comment.vegeterian) return vegetarianIcon;
+    if (dishComment === Comment.vegan) return veganIcon;
+    return 'error in returning comment icon';
+}
