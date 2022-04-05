@@ -17,19 +17,16 @@ export const selectCommentIcon = (dishComment: Comment) => {
 
 export const InputCheckGenerator = (inputType: 'radio' | 'checkbox', formName: string, name: string, values: string[]) => {
 
-    return (
-        <>
-            {
-                values.map((value, index) => {
-                    const currId = formName + index;
-                    return (
-                        <>
-                            <input type={inputType} id={currId} name={name} value={value} />
-                            <label htmlFor={currId} >hello</label>
-                        </>
-                    );
-                })
-            }
-        </>
-    );
+    const resVal = values.map((value, index) => {
+        const currId = formName + index;
+
+        return (
+            <div className="option">
+                <input type={inputType} id={currId} key={'input' + index} name={name} value={value} className='radio-container' />
+                <label htmlFor={currId} key={'label' + index} >{value}</label>
+            </div>
+        );
+    })
+
+    return resVal;
 }

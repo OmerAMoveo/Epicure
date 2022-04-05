@@ -3,6 +3,8 @@ import { colors } from "../../GlobalStyle";
 import { dish } from "../../mockDB/MockDB";
 import { selectCommentIcon } from "../../mockDB/MockDB";
 import { default as ilsIcon } from '../../images/ils.svg';
+import { useDispatch } from "react-redux";
+import { changeDisplayStatus } from "../../store/display-slice";
 
 const StarDishDiv = styled.div`
     display: flex;
@@ -23,7 +25,7 @@ const StarDishDiv = styled.div`
         }
 
         &.comment-image {
-            border:solid;
+            border: solid red;
             margin-left: auto; 
             margin-right: auto;
             bottom: 80px;
@@ -38,7 +40,7 @@ const StarDishDiv = styled.div`
             flex-direction: row;
             justify-content: space-between;
             align-content: flex-end;
-            border:solid;     
+            border: solid red;     
         }      
     }
 
@@ -52,15 +54,23 @@ const StarDishDiv = styled.div`
 `
 type Props = {
     dish: dish
+
 }
 
 const DishCard: React.FC<Props> = (props) => {
 
+    const dispatch = useDispatch();
+
     const mapIngredients = () => {
         return props.dish.ingredients.join(', ')
     }
+
+    const onClickHandler = () => {
+        dispatch(changeDisplayStatus(props.dish))
+    }
+
     return (
-        <StarDishDiv>
+        <StarDishDiv onClick={onClickHandler}>
             <img src={props.dish.image} className="main-image" alt='food' />
             <article>
                 <h1>{props.dish.name}</h1>
