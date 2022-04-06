@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import { Dispatch, SetStateAction, useState } from "react";
+import { FormEventHandler, LabelHTMLAttributes, useEffect, useState } from "react";
 import { default as x } from '../../images/x.svg'
-import { mapIngredients, selectCommentIcon, InputCheckGenerator } from '../../service/service'
+import { mapIngredients, selectCommentIcon } from '../../service/service'
 import { useSelector, RootStateOrAny, useDispatch } from "react-redux";
-import { changeDisplayStatus } from "../../store/display-slice";
+import { addItemsToCart, changeDisplayStatus } from "../../store/store";
 import { default as ilsIcon } from '../../images/ils.svg';
-import { default as plus } from '../../images/plus.svg';
-import { default as minus } from '../../images/minus.svg';
 
 const StyledDishModal = styled.div`
     display: flex;
@@ -48,6 +46,20 @@ const StyledDishModal = styled.div`
                     background-color: grey;
                 }
             }
+        }
+
+        & label{
+            width: 123px;
+            height: 21px;
+            margin: 4px 0 25px 19px;
+            font-family: HelveticaNeue;
+            font-size: 18px;
+            font-weight: 100;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: black;
         }
     }
 
@@ -104,14 +116,24 @@ const StyledDishModal = styled.div`
         flex-direction: column;
         padding: 5px;
         margin: 5px;
-        border: solid red;  
+ 
         
-        & div.no-items{
+        & div{
+            &.no-items {
             text-align: center;
+            }
+            margin-bottom: 10px;
+            margin-left: 10px;
+            & input[type= "radio"] {
+                transform: scale(2);       
+            }
+            & input[type= "checkbox"] {
+                transform: scale(2);       
+            }
         }
     }
 
-    & h1{
+    & h1 {
         height: 20px;
         font-family: HelveticaNeue;
         white-space: nowrap;
@@ -124,18 +146,127 @@ const StyledDishModal = styled.div`
         text-align: center;
         border-bottom: 1px solid rgba(222, 146, 0, 0.9);
         padding-bottom:3px;
+    }
+
+    & span {
+        &.quantity{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 100%;
+            margin-bottom: 20px;
+            & button {
+                font-size: 40px; 
+                border: none;
+                background-color: white;
+            }
+            & input{
+                pointer-events:none;
+                width: 20px;
+            }
+
+            & p {
+                white-space: nowrap;
+            }
+        }
+    }
+
+    & button {
+        &.add-item {
+            width: 206px;
+            height: 53px;
+            padding: 0 0px 0 0;
+            border-radius: 2.1px;
+            background-color: black;
 
 
+            & p {
+                vertical-align: middle;
+                font-family: HelveticaNeue;
+                font-size: 18.9px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: 1.08px;
+                text-align: center;
+                color: white;
+                margin-bottom: 10px;
+            }
+
+            &:disabled{
+                background-color: grey;
+            }
+        }
     }
 `
 
 const DishModal: React.FC = () => {
 
     const dispatch = useDispatch();
-    const theDisplayedDish = useSelector((state: RootStateOrAny) => state.data.dish);
+    const theDisplayedDish = useSelector((state: RootStateOrAny) => state.displayDish.dish);
+    const cart = useSelector((state: RootStateOrAny) => state.auth.cart);
+
+    const [displayedNumber, setDisplayedNumber] = useState(0);
+    const [disableMinusButton, setDisableMinusButton] = useState(displayedNumber !== 0);
+    const [sideDish, setSideDish] = useState<string | null>(null)
+    const [selectedChanges, setSelectedChanges] = useState<string[]>([])
+
+    useEffect(() => {
+        if (displayedNumber >= 0) setDisableMinusButton(false);
+        if (displayedNumber < 1) setDisableMinusButton(true);
+    }, [displayedNumber])
 
     const xClickedHandler = () => {
         dispatch(changeDisplayStatus(theDisplayedDish.dish));
+    }
+
+    const onMinusClickedHandler = () => {
+        setDisplayedNumber(displayedNumber - 1);
+    }
+
+    const onPlusClickedHandler = () => {
+        setDisplayedNumber(displayedNumber + 1);
+    }
+
+
+    const radioChangeHandler = (e: any) => {
+        setSideDish(e.target.value);
+    }
+
+    const checkBoxChangeHandler = (e: any) => {
+        const newArray = selectedChanges.filter(value => value !== e.target.defaultValue);
+        e.target.checked ?
+            setSelectedChanges([...selectedChanges, e.target.defaultValue]) :
+            setSelectedChanges(newArray);
+    }
+
+
+    const InputCheckGenerator = (inputType: 'radio' | 'checkbox', formName: string, name: string, values: string[], onChangeFunction: ((e: any) => void)) => {
+
+        const resVal = values.map((value, index) => {
+            const currId = formName + index;
+
+            return (
+                <div>
+                    <input type={inputType} id={currId} key={'input' + index} name={name} value={value} className={`${inputType}-container`} onChange={onChangeFunction} />
+                    <label htmlFor={currId} className={currId} key={'label' + index} >{value}</label>
+                </div>
+            );
+        })
+        return resVal;
+    }
+
+    const onSubmitDishForms = () => {
+        console.log('here');
+
+        dispatch(addItemsToCart({
+            name: theDisplayedDish.name,
+            quantity: displayedNumber,
+            price: theDisplayedDish.price,
+            side: sideDish,
+            changes: selectedChanges,
+        }));
     }
 
     return (
@@ -158,20 +289,23 @@ const DishModal: React.FC = () => {
                 <div className="line-4" />
             </div>
             <h1>Choose a side</h1>
-            <form>
-                {theDisplayedDish.sides.length ? InputCheckGenerator('radio', 'sides', 'sides', theDisplayedDish.sides) : <div className="no-items"><p >No sides for this dish.</p></div>}
+            <form >
+                {theDisplayedDish.sides.length ? InputCheckGenerator('radio', 'sides', 'sides', theDisplayedDish.sides, radioChangeHandler) : <div className="no-items"><p >No sides for this dish.</p></div>}
             </form>
             <h1>Changes</h1>
             <form>
-                {theDisplayedDish.changes.length ? InputCheckGenerator('checkbox', 'changes', 'changes', theDisplayedDish.changes) : <div className="no-items"><p>No changes for this dish.</p></div>}
+                {theDisplayedDish.changes.length ? InputCheckGenerator('checkbox', 'changes', 'changes', theDisplayedDish.changes, checkBoxChangeHandler) : <div className="no-items"><p>No changes for this dish.</p></div>}
             </form>
             <h1>Quantity</h1>
             <span className="quantity">
-                <img src={minus} />
-                <img src={plus} />
+                <button disabled={disableMinusButton} onClick={onMinusClickedHandler}>-</button>
+                <p>{displayedNumber}</p>
+                <button onClick={onPlusClickedHandler}>+</button>
             </span>
-        </StyledDishModal>
+            <button disabled={disableMinusButton} onClick={onSubmitDishForms} className="add-item"><p>ADD TO BAG</p></button>
+        </StyledDishModal >
     );
 }
 
 export default DishModal;
+
