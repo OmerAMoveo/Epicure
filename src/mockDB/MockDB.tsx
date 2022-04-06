@@ -274,7 +274,7 @@ export const dishes: dish[] = [
         price: 71,
         meal: [Meal.Lunch, Meal.Dinner],
         comment: Comment.spicy,
-        sides: ['More rice', 'Sticky rice'],
+        sides: [],
         changes: ['Without peanuts', 'No lemon', 'No Egg'],
         isSignatureDish: true,
         image: padkimao,

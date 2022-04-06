@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import DishCard from "../DishCard/DishCard";
 import { getDishes, getRestaurants } from "../../mockDB/MockDB";
-import { useCallback, useMemo } from "react";
-
+import { useCallback } from "react";
 
 const StyledTable = styled.table`
     display: table;
@@ -46,23 +45,16 @@ const StyledPopularDishes = styled.div`
 `
 
 const PopularDishes: React.FC = () => {
-    const memoizedRestaurants = useMemo(() => { return getRestaurants() }, [])
+
     //on real-version: randomize x restaurants for mapping if it's okay for Shilo
-
     const dishesTableHeader = useCallback(() => {
-        console.log(memoizedRestaurants);
-
-        return memoizedRestaurants.map(singleRestaurant => <th key={singleRestaurant.id}>{singleRestaurant.name}</th>)
+        const uniqueRestaurants = getRestaurants();
+        return uniqueRestaurants.map(singleRestaurant => <th key={singleRestaurant.id}>{singleRestaurant.name}</th>)
     }, []);
 
     const dishTableCards = useCallback(() => {
         const uniqueRestaurants = getDishes();
-
-        return uniqueRestaurants.map(singleDish => singleDish.isSignatureDish ?
-            <td key={singleDish.restaurantId}
-                id={singleDish.restaurantId.toString()}>
-                <DishCard dish={singleDish} />
-            </td> : null)
+        return uniqueRestaurants.map(singleDish => singleDish.isSignatureDish ? <td key={singleDish.restaurantId}><DishCard dish={singleDish} /></td> : null)
     }, []);
     return (
         <>
