@@ -50,7 +50,6 @@ const PopularDishes: React.FC = () => {
     //on real-version: randomize x restaurants for mapping if it's okay for Shilo
 
     const dishesTableHeader = useCallback(() => {
-        console.log(memoizedRestaurants);
 
         return memoizedRestaurants.map(singleRestaurant => <th key={singleRestaurant.id}>{singleRestaurant.name}</th>)
     }, []);

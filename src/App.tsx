@@ -12,6 +12,7 @@ import RestaurantsPage from './pages/RestaurantsPage';
 
 function App() {
   return (
+    <>
     <BrowserRouter>
       <Layout>
         <Routes>
@@ -21,6 +22,7 @@ function App() {
         </Routes>
       </Layout>
     </BrowserRouter>
+    </>
   );
 }
 
