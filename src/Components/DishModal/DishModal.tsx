@@ -214,7 +214,7 @@ const DishModal: React.FC = () => {
 
     useEffect(() => {
         if (displayedNumber >= 0) setDisableMinusButton(false);
-        if (displayedNumber < 1) setDisableMinusButton(true);
+        if (!displayedNumber) setDisableMinusButton(true);
     }, [displayedNumber])
 
     const xClickedHandler = () => {
@@ -240,7 +240,6 @@ const DishModal: React.FC = () => {
             setSelectedChanges([...selectedChanges, e.target.defaultValue]) :
             setSelectedChanges(newArray);
     }
-
 
     const InputCheckGenerator = (inputType: 'radio' | 'checkbox', formName: string, name: string, values: string[], onChangeFunction: ((e: any) => void)) => {
 
