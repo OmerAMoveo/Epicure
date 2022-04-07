@@ -95,7 +95,7 @@ const ChefOfTheWeek: React.FC = () => {
     }, [])
     const mapRestaurants = () => {
         const retValue = memoizedRestaurants.map(singleRestaurant => {
-            return <RestaurantCard restaurant={singleRestaurant} displayChef={false} color={colors.beige} />
+            return <RestaurantCard restaurant={singleRestaurant} displayChef={false} color={colors.beige} isSmall={true} />
         })
         return retValue;
 
