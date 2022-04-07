@@ -7,11 +7,14 @@ import { default as gespacho } from '../images/gespacho-image.png'
 import { default as padkimao } from '../images/pad-ki-mao-image.png'
 import { default as redfarm } from '../images/red-farm-image.png'
 import { default as smokedpizza } from '../images/smoked-pizza-image.png'
+import { default as yossiShitrit } from '../images/yossi-shitrit-image.png'
 import { default as spicyIcon } from '../images/spicy-icon.svg'
 import { default as vegetarianIcon } from '../images/vegetarian-icon.svg'
 import { default as veganIcon } from '../images/vegan-icon.svg'
 
 // Types:
+
+
 export type restaurant = {
     name: string,
     id: number,
@@ -59,6 +62,16 @@ export type chef = {
 }
 
 //Mock data:
+
+//Chefs:
+export const Chefs: chef[] = [
+    {
+        name: 'Yossi Shitrit',
+        description: "Chef Yossi Shitrit has been living and breathing his culinary dreams for more than two decades, including  running the kitchen in his first restaurant, the fondly-remembered  Violet, located in Moshav Udim.  Shitrit's creativity and culinary acumen  born of long experience are expressed in the every detail of each and every dish.",
+        image: yossiShitrit,
+    }
+]
+
 //Restaurants:
 export const Restaurants: restaurant[] = [
     {
@@ -143,7 +156,7 @@ export const Restaurants: restaurant[] = [
             'Gespacho',
         ],
         bigImage: '',
-        smallImage: '',
+        smallImage: claroimage,
         rating: 9.1,
     },
 
@@ -160,7 +173,7 @@ export const Restaurants: restaurant[] = [
             'Sandwich Sushi',
         ],
         bigImage: '',
-        smallImage: '',
+        smallImage: claroimage,
         rating: 9.1,
     }
 
@@ -413,6 +426,10 @@ export const getRestaurants = () => {
 
 export const getDishes = () => {
     return dishes;
+}
+
+export const getChef = () => {
+    return Chefs;
 }
 
 export const selectCommentIcon = (dishComment: Comment) => {

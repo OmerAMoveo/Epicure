@@ -3,16 +3,15 @@ import { restaurant } from "../mockDB/MockDB"
 import styled from "styled-components";
 import { colors } from "../GlobalStyle";
 
-const RestaurantCardDiv = styled.div`
+const RestaurantCardDiv = styled.div<{ color: string }>`
     display: inline-block;  
     width: 206px;
     height: 338px;
     margin-right: 10px;
     margin-left: 10px;
-    flex: 0 0 auto;
     flex-direction: column;
     text-align:center;
-    background-color: ${colors.light_tan};   
+    background-color: ${props => props.color};   
 
     & img {
         width: 206px;
@@ -55,16 +54,18 @@ const RestaurantCardDiv = styled.div`
 
 type Props = {
     restaurant: restaurant,
+    displayChef: boolean,
+    color: string,
 }
 
 const RestaurantCard: React.FC<Props> = (props: Props) => {
 
     return (
-        <RestaurantCardDiv>
+        <RestaurantCardDiv color={props.color}>
             <img src={props.restaurant.smallImage} alt={`${props.restaurant.smallImage}`} />
             <section>
                 <h1>{props.restaurant.name}</h1>
-                <h2>{props.restaurant.chef}</h2>
+                {props.displayChef && <h2>{props.restaurant.chef}</h2>}
             </section>
         </RestaurantCardDiv>
     );
