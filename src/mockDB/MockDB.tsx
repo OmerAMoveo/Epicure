@@ -433,8 +433,14 @@ export const getChef = () => {
 }
 
 export const selectCommentIcon = (dishComment: Comment) => {
-    if (dishComment === Comment.spicy) return spicyIcon;
-    if (dishComment === Comment.vegeterian) return vegetarianIcon;
-    if (dishComment === Comment.vegan) return veganIcon;
-    return 'error in returning comment icon';
+    switch (dishComment) {
+        case Comment.spicy:
+            return spicyIcon;
+        case Comment.vegeterian:
+            return vegetarianIcon;
+        case Comment.vegan:
+            return veganIcon;
+        default: return 'error in returning comment icon';
+    }
+
 }
