@@ -208,14 +208,8 @@ const DishModal: React.FC = () => {
     const cart = useSelector((state: RootStateOrAny) => state.auth.cart);
 
     const [displayedNumber, setDisplayedNumber] = useState(0);
-    const [disableMinusButton, setDisableMinusButton] = useState(displayedNumber !== 0);
     const [sideDish, setSideDish] = useState<string | null>(null)
     const [selectedChanges, setSelectedChanges] = useState<string[]>([])
-
-    useEffect(() => {
-        if (displayedNumber >= 0) setDisableMinusButton(false);
-        if (!displayedNumber) setDisableMinusButton(true);
-    }, [displayedNumber])
 
     const xClickedHandler = () => {
         dispatch(changeDisplayStatus(theDisplayedDish.dish));
@@ -228,7 +222,6 @@ const DishModal: React.FC = () => {
     const onPlusClickedHandler = () => {
         setDisplayedNumber(displayedNumber + 1);
     }
-
 
     const radioChangeHandler = (e: any) => {
         setSideDish(e.target.value);
@@ -297,11 +290,11 @@ const DishModal: React.FC = () => {
             </form>
             <h1>Quantity</h1>
             <span className="quantity">
-                <button disabled={disableMinusButton} onClick={onMinusClickedHandler}>-</button>
+                <button disabled={displayedNumber ? false : true} onClick={onMinusClickedHandler}>-</button>
                 <p>{displayedNumber}</p>
                 <button onClick={onPlusClickedHandler}>+</button>
             </span>
-            <button disabled={disableMinusButton} onClick={onSubmitDishForms} className="add-item"><p>ADD TO BAG</p></button>
+            <button disabled={displayedNumber ? false : true} onClick={onSubmitDishForms} className="add-item"><p>ADD TO BAG</p></button>
         </StyledDishModal >
     );
 }
