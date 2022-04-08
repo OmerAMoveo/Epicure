@@ -2,6 +2,7 @@ import React from "react";
 import { restaurant } from "../mockDB/MockDB"
 import styled from "styled-components";
 import { colors } from "../GlobalStyle";
+import { Link } from "react-router-dom";
 
 const RestaurantCardDiv = styled.div`
     display: inline-block;  
@@ -60,13 +61,15 @@ type Props = {
 const RestaurantCard: React.FC<Props> = (props: Props) => {
 
     return (
-        <RestaurantCardDiv>
-            <img src={props.restaurant.smallImage} alt={`${props.restaurant.smallImage}`} />
-            <section>
-                <h1>{props.restaurant.name}</h1>
-                <h2>{props.restaurant.chef}</h2>
-            </section>
-        </RestaurantCardDiv>
+        <Link to={`/${props.restaurant.name}`}>
+            <RestaurantCardDiv>
+                <img src={props.restaurant.smallImage} alt={`${props.restaurant.smallImage}`} />
+                <section>
+                    <h1>{props.restaurant.name}</h1>
+                    <h2>{props.restaurant.chef}</h2>
+                </section>
+            </RestaurantCardDiv>
+        </Link>
     );
 }
 

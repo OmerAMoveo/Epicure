@@ -6,19 +6,20 @@ import { default as ilsIcon } from '../../images/ils.svg';
 import { useDispatch } from "react-redux";
 import { changeDisplayStatus } from "../../store/store";
 
-const StarDishDiv = styled.div`
+const StarDishDiv = styled.div<{ isSmall: boolean }>`
     display: flex;
     flex-flow: column;
     width: 259.2px;
-    height: 470.9px;
-    background-color: ${colors.light_tan};
+    width: ${props => props.isSmall ? '157px' : '259.2px'};
+    height: ${props => props.isSmall ? '274px' : '470.9px'};
+    background-color: ${props => props.isSmall ? colors.sand_20 : colors.light_tan};
     margin-right: 10px;
     margin-left: 10px;
     text-align: center;
     & img {
         &.main-image{
-            width: 259.2px;
-            height: 208.8px;
+            width: inherit;
+            height: ${props => props.isSmall ? '100px' : '208.8px'};
             object-fit: cover;
         }
 
@@ -26,23 +27,28 @@ const StarDishDiv = styled.div`
             margin-left: auto; 
             margin-right: auto;
             width: 39px;
-            height: 30px;
-
+            height: 20px;
         }
     }
+    & h1.name {
+        font-size: ${props => props.isSmall ? '13px' : 'auto'};
+        margin-bottom: 1px;
+    }
+
     & section.description {
         display: flex;
         flex-direction: column;
         align-content: center;
         height: 100px;
+        font-size: ${props => props.isSmall ? '15px' : 'auto'};
     }
+    
     & div.empty-box{
         margin-left: auto; 
         margin-right: auto;
         bottom: 80px;
         width: 39px;
-        height: 30px;
-        
+        height: 30px;       
     }
 
     & div.description-box{
@@ -52,6 +58,8 @@ const StarDishDiv = styled.div`
     & div.to-bottom{
         display: flex;
         flex-direction: column;
+        height: ${props => props.isSmall ? '40px' : 'auto'};
+
         & span {
             &.price-section{
                 display: flex;
@@ -60,7 +68,7 @@ const StarDishDiv = styled.div`
                 margin-bottom: 30px;
                 & div{
                     &.line-4 {
-                        width: 46.2px;
+                        width: ${props => props.isSmall ? '32px' : '46.2px'};
                         height: 0.8px;
                         margin: 11.2px 13.7px 10px 13.7px;
                         background-color: grey;
@@ -70,20 +78,26 @@ const StarDishDiv = styled.div`
                         width: 32px;
                         height: 29px;
                         font-family: HelveticaNeue;
-                        font-size: 24.9px;
+                        font-size: ${props => props.isSmall ? '14px' : '24.9px'};
                         font-weight: 100;
                         font-stretch: normal;
                         font-style: normal;
                         line-height: normal;
                         letter-spacing: 1.66px;
-                    }                  
+                    }
+                    
+                    & img {
+                        width: ${props => props.isSmall ? '5px' : 'auto'};
+                        height: ${props => props.isSmall ? '5px' : 'auto'};
+                    }
                 }
             }
         }      
     }
 `
 type Props = {
-    dish: dish
+    dish: dish,
+    isSmall: boolean,
 
 }
 
@@ -100,12 +114,12 @@ const DishCard: React.FC<Props> = (props) => {
     }
 
     return (
-        <StarDishDiv onClick={onClickHandler}>
+        <StarDishDiv onClick={onClickHandler} isSmall={props.isSmall}>
             <img src={props.dish.image} className="main-image" alt='food' />
-            <article>
-                <h1>{props.dish.name}</h1>
-                <section className="description"><p className="description">{mapIngredients()}</p></section>
-            </article>
+            {/* <article> */}
+            <h1 className="name">{props.dish.name}</h1>
+            <section className="description"><p className="description">{mapIngredients()}</p></section>
+            {/* </article> */}
             <div className="to-bottom">
                 {props.dish.comment ? <img src={selectCommentIcon(props.dish.comment)} className="comment-image" alt={props.dish.comment.toString()} /> : <div className="empty-box" />}
                 <span className="price-section">

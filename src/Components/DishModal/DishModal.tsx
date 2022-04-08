@@ -248,7 +248,7 @@ const DishModal: React.FC = () => {
             const currId = formName + index;
 
             return (
-                <div>
+                <div key={`choice-row-${index}`}>
                     <input type={inputType} id={currId} key={'input' + index} name={name} value={value} className={`${inputType}-container`} onChange={onChangeFunction} />
                     <label htmlFor={currId} className={currId} key={'label' + index} >{value}</label>
                 </div>

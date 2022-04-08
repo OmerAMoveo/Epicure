@@ -50,7 +50,6 @@ const PopularDishes: React.FC = () => {
     //on real-version: randomize x restaurants for mapping if it's okay for Shilo
 
     const dishesTableHeader = useCallback(() => {
-        console.log(memoizedRestaurants);
 
         return memoizedRestaurants.map(singleRestaurant => <th key={singleRestaurant.id}>{singleRestaurant.name}</th>)
     }, []);
@@ -61,7 +60,7 @@ const PopularDishes: React.FC = () => {
         return uniqueRestaurants.map(singleDish => singleDish.isSignatureDish ?
             <td key={singleDish.restaurantId}
                 id={singleDish.restaurantId.toString()}>
-                <DishCard dish={singleDish} />
+                <DishCard dish={singleDish} isSmall={false} />
             </td> : null)
     }, []);
     return (
