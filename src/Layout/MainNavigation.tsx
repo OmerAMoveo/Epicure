@@ -8,6 +8,7 @@ import { default as hamburger } from '../images/opening-menu-icon.svg'
 
 const StyledBar = styled.div`
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -19,6 +20,9 @@ const StyledBar = styled.div`
         flex-grow: 1;
         display: flex;
         justify-content: space-evenly;
+        align-items: center;
+        }
+
         &.center {            
             flex-grow: 2;
         }
@@ -30,9 +34,50 @@ const StyledBar = styled.div`
             &.icon-set-1 {
                 width: 18px;
                 height: 18px;
-            }     
-    }       
-}
+            }
+        
+            &.responsive-hamburger{
+                    width: 18px;
+                    height: 18px;
+
+                @media only screen and (min-width: 600px){
+                    display: none;
+                }
+            }
+
+            &.responsive-logo{
+                @media only screen and (min-width: 600px){
+                    display: none;
+                }
+            }
+        }
+        & section.responsive-section { 
+            @media only screen and (max-width: 600px){
+                display: none;
+            }
+
+            & p {
+                color: black;
+                opacity: 0.6;
+                &:hover{
+                    cursor: default;
+                }
+                &.site-name{
+                    height: 32px;
+                    font-family: HelveticaNeue;
+                    font-size: 27px;
+                    font-weight: lighter;
+                    letter-spacing: 1.35px;
+                }
+
+                &.menu-item{
+                    font-family: HelveticaNeue;
+                    font-size: 18px;
+                    font-weight: 100;
+                    letter-spacing: 1.92px;
+                }
+            }
+        }  
 `
 type Props = {
     hamburgerClicked: boolean,
@@ -40,6 +85,7 @@ type Props = {
 }
 
 const MainNavigation: React.FC<Props> = (props) => {
+
 
     const hamburgerClickedHandler = () => {
         props.setHamburgerClicked(!props.hamburgerClicked);
@@ -49,10 +95,20 @@ const MainNavigation: React.FC<Props> = (props) => {
         <>
             <StyledBar>
                 <section>
-                    <img src={hamburger} className='icon-set-1' id='icon' alt='menu' onClick={hamburgerClickedHandler} />
+                    <img src={hamburger}
+                        className='responsive-hamburger'
+                        id='icon'
+                        alt='menu'
+                        onClick={hamburgerClickedHandler} />
+                    <section className='responsive-section'>
+                        <img src={miniLogo} alt="logo" />
+                        <p className='site-name'>EPICURE</p>
+                        <p className='menu-item'>Restaurant</p>
+                        <p className='menu-item'>Chefs</p>
+                    </section>
                 </section>
                 <section className='center'>
-                    <img src={miniLogo} alt='mini logo' />
+                    <img src={miniLogo} className="responsive-logo" alt='mini logo' />
                 </section>
                 <section>
                     <SearchBar />

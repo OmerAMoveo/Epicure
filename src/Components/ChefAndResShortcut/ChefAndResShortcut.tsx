@@ -2,6 +2,10 @@ import styled from "styled-components"
 import { colors } from "../../GlobalStyle";
 
 const ShortcutWrapper = styled.div`
+    @media only screen and (min-width: 600px){
+        display: none;
+    }
+
     display: flex;
     justify-content: space-evenly;
     align-items: center;
