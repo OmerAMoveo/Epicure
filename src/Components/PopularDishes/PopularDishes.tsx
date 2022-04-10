@@ -60,7 +60,7 @@ const PopularDishes: React.FC = () => {
         return uniqueRestaurants.map(singleDish => singleDish.isSignatureDish ?
             <td key={singleDish.restaurantId}
                 id={singleDish.restaurantId.toString()}>
-                <DishCard dish={singleDish} />
+                <DishCard dish={singleDish} isSmall={false} />
             </td> : null)
     }, []);
     return (
