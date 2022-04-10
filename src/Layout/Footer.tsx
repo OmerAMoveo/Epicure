@@ -6,7 +6,7 @@ const StyledFooter = styled.footer`
     top: 0;
     height: 126px;
     width: 100%;
-    background-color: lightgray;
+    border-top: solid rgba(0,0,0,0.15);
 
     & div.text-container{
         width: 100%;
