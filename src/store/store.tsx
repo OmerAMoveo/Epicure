@@ -22,7 +22,6 @@ export const displaySlice = createSlice({
                 state.dish = action.payload.dish;
             }
         },
-
     }
 });
 

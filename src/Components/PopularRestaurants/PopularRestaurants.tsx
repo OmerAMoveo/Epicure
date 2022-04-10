@@ -2,6 +2,7 @@ import RestaurantCard from "../RestaurantCard";
 import styled from "styled-components";
 import { useCallback, useEffect, useState } from "react";
 import { getRestaurants, restaurant } from "../../mockDB/MockDB";
+import { colors } from "../../GlobalStyle";
 
 
 const WrapperDiv = styled.div`
@@ -55,7 +56,7 @@ const PopularRestaurants: React.FC = () => {
         return favoriteRestaurants.map(singleRestaurant => {
             return (
                 <div className="card" key={singleRestaurant.name}>
-                    <RestaurantCard restaurant={singleRestaurant} key={singleRestaurant.name} />
+                    <RestaurantCard restaurant={singleRestaurant} displayChef={true} color={colors.light_tan} key={singleRestaurant.name} isSmall={false} />
                 </div>
             );
         });

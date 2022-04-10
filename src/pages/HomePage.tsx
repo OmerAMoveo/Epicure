@@ -6,8 +6,13 @@ import PopularDishes from "../Components/PopularDishes/PopularDishes";
 import { useEffect, useState } from "react";
 import { RootStateOrAny, useSelector } from "react-redux";
 import DishModal from '../Components/DishModal/DishModal'
+import IconsMeanings from "../Components/IconsMeaning/IconsMeaning";
+import ChefOfTheWeek from "../Components/ChefOfTheWeek/ChefOfTheWeek";
+import AboutUs from "../Components/AboutUs/AboutUs";
+
 const HomePageWrapper = styled.div`
     display: flex;
+    width: inherit;
     flex-direction: column;
     justify-items: center;
     overflow: hidden;
@@ -31,6 +36,9 @@ const HomePage: React.FC = () => {
                     <ChefAndResShortcut />
                     <PopularRestaurants />
                     <PopularDishes />
+                    <IconsMeanings />
+                    <ChefOfTheWeek />
+                    <AboutUs />
                 </HomePageWrapper>
             }
         </>
