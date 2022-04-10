@@ -16,7 +16,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path='/' element={<Navigate to='/home' />} />
-          <Route path='/home' element={<HomePage />} />
+          {<Route path='/home' element={<HomePage />} />}
           <Route path='/:restaurantParam' element={<FullRestaurant />} />
         </Routes>
       </Layout>
