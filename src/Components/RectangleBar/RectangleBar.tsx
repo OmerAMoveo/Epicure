@@ -2,6 +2,8 @@ import { default as mainImage } from '../../images/main-image.png'
 import styled from "styled-components";
 import { colors } from '../../GlobalStyle';
 import { default as searchIcon } from '../../images/search-icon.svg'
+import SearchDetails from './SearchDetails';
+import { FormEvent, useState } from 'react';
 
 
 const StyledRectangle = styled.div`
@@ -57,22 +59,51 @@ const StyledRectangle = styled.div`
                 background-color: ${colors.white_11}; 
                 border: none;
             }
+            & input:focus, textarea:focus {
+                border: none;;
+                box-shadow: none;
+                outline-offset: 0px;
+                outline: none;
+            }
+
+            & img{
+                    margin-right: 8px;
+                }
         }
 
     }
 `
 
 const RectangleBar: React.FC = () => {
+
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [showQueryResults, setShowQueryResults] = useState<boolean>(false);
+
+    const onQueryChange = (e: any) => {
+        setSearchQuery(e.target.value);
+        if (e.target.value === '')
+            setShowQueryResults(false);
+        else
+            setShowQueryResults(true);
+    }
+
     return (
         <StyledRectangle>
             <div className='middleBar'>
                 <p className='epicure-description'>Epicure works with the top chef restaurants in Tel Aviv</p>
                 <div className='search-box'>
                     <img src={searchIcon} alt="search-icon" />
-                    <input placeholder='Search for restaurant cuisine, chef'></input>
+                    <input type="search"
+                        id="query"
+                        name="q"
+                        placeholder='Search for restaurant cuisine, chef'
+                        onInput={onQueryChange}
+                        autoComplete="off"
+                    ></input>
                 </div>
+                {showQueryResults && <SearchDetails query={searchQuery} />}
             </div>
-        </StyledRectangle>
+        </StyledRectangle >
     );
 }
 

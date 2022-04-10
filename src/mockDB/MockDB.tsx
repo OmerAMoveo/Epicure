@@ -30,7 +30,7 @@ export type restaurant = {
 }
 
 export enum Meal {
-    Breakfest = 1,
+    Breakfast = 1,
     Lunch,
     Dinner,
 }
@@ -265,12 +265,32 @@ export const dishes: dish[] = [
             'Butter',
         ],
         price: 43,
-        meal: [Meal.Breakfest, Meal.Lunch],
+        meal: [Meal.Breakfast, Meal.Lunch],
         comment: null,
         sides: [],
         changes: ['Without butter'],
         isSignatureDish: false,
         image: kaltzone,
+    },
+
+    {
+        name: 'Sandwich Sushi',
+        restaurantId: 3,
+        ingredients: [
+            'Rice',
+            'Carrot',
+            'Cucamber',
+            'Cream Cheese',
+            'Tamago',
+            'Shitaki'
+        ],
+        price: 54,
+        meal: [Meal.Breakfast, Meal.Lunch, Meal.Dinner],
+        comment: Comment.spicy,
+        sides: [],
+        changes: ['Without peanuts', 'No lemon', 'No Egg'],
+        isSignatureDish: false,
+        image: garbanzoPrito,
     },
 
     {
@@ -293,25 +313,7 @@ export const dishes: dish[] = [
         image: padkimao,
     },
 
-    {
-        name: 'Sandwich Sushi',
-        restaurantId: 3,
-        ingredients: [
-            'Rice',
-            'Carrot',
-            'Cucamber',
-            'Cream Cheese',
-            'Tamago',
-            'Shitaki'
-        ],
-        price: 54,
-        meal: [Meal.Breakfest, Meal.Lunch, Meal.Dinner],
-        comment: Comment.spicy,
-        sides: [],
-        changes: ['Without peanuts', 'No lemon', 'No Egg'],
-        isSignatureDish: false,
-        image: garbanzoPrito,
-    },
+
 
     {
         name: 'Smoked Pizza',
@@ -356,7 +358,7 @@ export const dishes: dish[] = [
             'Basil',
         ],
         price: 61,
-        meal: [Meal.Breakfest, Meal.Lunch, Meal.Dinner],
+        meal: [Meal.Breakfast, Meal.Lunch, Meal.Dinner],
         comment: null,
         sides: [],
         changes: [],
@@ -409,7 +411,7 @@ export const dishes: dish[] = [
             'Shitaki'
         ],
         price: 54,
-        meal: [Meal.Breakfest, Meal.Lunch, Meal.Dinner],
+        meal: [Meal.Breakfast, Meal.Lunch, Meal.Dinner],
         comment: Comment.spicy,
         sides: [],
         changes: ['Without peanuts', 'No lemon', 'No Egg'],
