@@ -3,32 +3,35 @@ import { restaurant } from "../mockDB/MockDB"
 import styled from "styled-components";
 import { colors } from "../GlobalStyle";
 
-const RestaurantCardDiv = styled.div<{ color: string }>`
-    display: inline-block;  
-    width: 206px;
-    height: 338px;
+const RestaurantCardDiv = styled.div<{ color: string, isSmall: boolean }>`
+    display: inline-block;
+    width: ${props => props.isSmall ? '153.6px' : '206px'};
+    height: ${props => props.isSmall ? '237.4px' : '338px'};
     margin-right: 10px;
     margin-left: 10px;
+    margin-bottom: 20px;
     flex-direction: column;
     text-align:center;
     background-color: ${props => props.color};   
 
     & img {
-        width: 206px;
-        height: 224px;
-        margin: 0 0 25px;
+        width: ${props => props.isSmall ? '153.6px' : '206px'};
+        height: ${props => props.isSmall ? '149px' : '224px'};
+        margin: 0 0 15px;
         object-fit: cover;
     }
     & section {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        text-align: center;
 
         & h1 {
-        white-space: nowrap;
-        margin: 0 25px 4px 27px;
+        width: 100%;
+        margin: 0;
         font-family: HelveticaNeue;
-        font-size: 25px;
+        /* font-size: 25px; */
+        font-size: ${props => props.isSmall ? '17px' : '25px'};
         font-weight: bold;
         font-stretch: normal;
         font-style: normal;
@@ -41,6 +44,8 @@ const RestaurantCardDiv = styled.div<{ color: string }>`
             margin: 4px 0 0;
             font-family: HelveticaNeue;
             font-size: 20px;
+        font-size: ${props => props.isSmall ? '13.3px' : '20px'};
+
             font-weight: 100;
             font-stretch: normal;
             font-style: normal;
@@ -56,12 +61,13 @@ type Props = {
     restaurant: restaurant,
     displayChef: boolean,
     color: string,
+    isSmall: boolean,
 }
 
 const RestaurantCard: React.FC<Props> = (props: Props) => {
 
     return (
-        <RestaurantCardDiv color={props.color}>
+        <RestaurantCardDiv color={props.color} isSmall={props.isSmall}>
             <img src={props.restaurant.smallImage} alt={`${props.restaurant.smallImage}`} />
             <section>
                 <h1>{props.restaurant.name}</h1>

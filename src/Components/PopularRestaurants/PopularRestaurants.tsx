@@ -56,7 +56,7 @@ const PopularRestaurants: React.FC = () => {
         return favoriteRestaurants.map(singleRestaurant => {
             return (
                 <div className="card" key={singleRestaurant.name}>
-                    <RestaurantCard restaurant={singleRestaurant} displayChef={true} color={colors.light_tan} key={singleRestaurant.name} />
+                    <RestaurantCard restaurant={singleRestaurant} displayChef={true} color={colors.light_tan} key={singleRestaurant.name} isSmall={false} />
                 </div>
             );
         });
