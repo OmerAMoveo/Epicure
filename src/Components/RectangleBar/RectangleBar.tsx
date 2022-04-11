@@ -5,7 +5,6 @@ import { default as searchIcon } from '../../images/search-icon.svg'
 import SearchDetails from './SearchDetails';
 import { useState } from 'react';
 
-
 const StyledRectangle = styled.div`
     display: flex;
     justify-items: center;

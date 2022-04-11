@@ -59,7 +59,6 @@ const RestaurantCardDiv = styled.div<{ color: string, isSmall: boolean }>`
             color: black;
         }
     }
-    
 `
 
 type Props = {

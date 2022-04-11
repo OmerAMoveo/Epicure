@@ -71,6 +71,7 @@ const PopularDishes: React.FC = () => {
                 <DishCard dish={singleDish} isSmall={false} />
             </td> : null)
     }, []);
+    
     return (
         <>
             <CenteredH3>SIGNATURE DISH OF:</CenteredH3>

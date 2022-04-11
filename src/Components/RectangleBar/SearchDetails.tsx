@@ -27,7 +27,6 @@ const SearchDetails: React.FC<Props> = (props) => {
     const [displayedChefs, setDisplayedChefs] = useState<chef[]>(allChefs.filter(chef => chef.name.toLowerCase().startsWith(props.query.toLowerCase())))
     const [displayedCuisine, setDisplayedCuisines] = useState<{ text: string }[]>(Cuisines.filter(cuisine => cuisine.text.toLowerCase().startsWith(props.query.toLowerCase())));
 
-
     return (
         <StyledDiv>
             <SearchField headline="restaurants"

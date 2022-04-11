@@ -49,7 +49,6 @@ type Props = {
 
 const SearchField: React.FC<Props> = (props) => {
 
-
     const mapListItemsElements = useCallback(() => {
         const mappedElements = props.mappedData.map((item, index) => <li key={index}>{item[props.displayedField]}</li>);
         console.log(mappedElements[0]);
