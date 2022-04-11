@@ -12,14 +12,15 @@ const StyledDiv = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    left: 0;
-    right: 0;
     overflow: scroll;
     text-align: center;
     justify-content: space-evenly;
+    @media only screen and (min-width: 600px){
+        width: 40%;
+    }
+    
     & div {
-    text-align: center;
-
+        text-align: center; 
     }
 `
 
@@ -27,7 +28,7 @@ const ShowRestaurants: React.FC<Props> = (props) => {
 
     const mapRestaurants = () => {
         return props.restaurants.map(singleRestaurant =>
-            <div><RestaurantCard restaurant={singleRestaurant} displayChef={true} color={colors.beige} isSmall={true} /></div>)
+            <RestaurantCard restaurant={singleRestaurant} displayChef={true} color={colors.beige} isSmall={true} />)
     }
 
     return (

@@ -1,13 +1,12 @@
 import { useMemo, useState } from "react";
 import styled from "styled-components"
 import { colors } from "../../GlobalStyle";
-import { chef, getChef, getRestaurants } from "../../mockDB/MockDB";
+import { chef, getRestaurants } from "../../mockDB/MockDB";
 import RestaurantCard from "../RestaurantCard";
-import ChefCard from "./ChefCard";
 
 const marginRight = '218px';
 
-const WeekChefDiv = styled.div`
+const StyledDiv = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -128,12 +127,15 @@ const WeekChefDiv = styled.div`
     }
 `
 
-const ChefOfTheWeek: React.FC = () => {
-    const [chefOfTheWeek, setChefOfTheWeek] = useState<chef>(getChef()[0])
+type Props = {
+    chef: chef,
+}
+
+const ChefCard: React.FC<Props> = (props) => {
     const memoizedRestaurants = useMemo(() => {
         const allRestaurants = getRestaurants();
 
-        return allRestaurants.filter(singleRestaurant => singleRestaurant.chef === chefOfTheWeek.name)
+        return allRestaurants.filter(singleRestaurant => singleRestaurant.chef === props.chef.name)
     }, [])
     const mapRestaurants = () => {
         const retValue = memoizedRestaurants.map(singleRestaurant => {
@@ -143,11 +145,20 @@ const ChefOfTheWeek: React.FC = () => {
 
     }
     return (
-        <WeekChefDiv>
-            <h1>CHEF OF THE WEEK :</h1>
-            <ChefCard chef={getChef()[0]} />
-        </WeekChefDiv>
+        <StyledDiv>
+            <section className="chef-details-rectangle">
+                <div className="container">
+                    <img className="chef-image" src={props.chef.image} />
+                    <div className="tag"><p>{props.chef.name}</p></div>
+                </div>
+                <p className="description">{props.chef.description}</p>
+            </section>
+            <p className="chef-restaurants-headline">{props.chef.name}'s restaurants  :</p>
+            <div className="restaurants-container">
+                {mapRestaurants()}
+            </div>
+        </StyledDiv>
     );
 }
 
-export default ChefOfTheWeek;
+export default ChefCard;

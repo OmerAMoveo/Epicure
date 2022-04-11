@@ -6,7 +6,6 @@ const StyledDiv = styled.div`
     flex-direction: column;
     width: 100%;;
     margin: inherit;
-    border:solid;
     & h3 {
         height: 18px;
         margin: 0 0 10px;
@@ -27,8 +26,10 @@ const StyledDiv = styled.div`
         list-style-type: none;
 
         & li{
-            font-family: HelveticaNeue;
+            font-family: HelveticaNeue-thin;
             font-weight: 100;
+            margin-left: 30px;
+            margin-top: -10px;
             letter-spacing: 1.07px;
             color: black;
             }

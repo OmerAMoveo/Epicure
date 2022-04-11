@@ -8,6 +8,7 @@ const StyledDiv = styled.div`
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
+
     & h1{
         width: 100%;
         height: 23px;
@@ -27,6 +28,9 @@ const StyledDiv = styled.div`
             display: flex;
             flex-direction: row;
             justify-content: space-around;
+          @media only screen and (min-width: 600px){
+            margin-bottom: 20px;
+          }
 
             & div{
                 height: 18px;
@@ -34,16 +38,21 @@ const StyledDiv = styled.div`
                 font-family: HelveticaNeue;
                 white-space: nowrap;
                 font-size: 16px;
-                font-weight: normal;
-                font-stretch: normal;
-                font-style: normal;
-                line-height: normal;
                 letter-spacing: 1.71px;
                 color: black;
-
-                &.default,:hover,:active{
+                                                         
+                &:hover,:active{
                     font-weight: bold;
+                    cursor: default;
                 }
+            }
+        }
+
+        &.restaurant-container{
+            @media only screen and (min-width: 600px){
+                display: flex;
+                width: 100%;
+                justify-content: center;
             }
         }
     }
@@ -95,7 +104,9 @@ const RestaurantsPage: React.FC = () => {
                 <div onClick={onPopularClick}>Most Popular</div>
                 <div onClick={onOpenClick}>Open Now</div>
             </div>
-            <ShowRestaurants restaurants={displayedRestaurants} />
+            <div className="restaurant-container">
+                <ShowRestaurants restaurants={displayedRestaurants} />
+            </div>
         </StyledDiv>
     );
 }

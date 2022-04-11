@@ -11,9 +11,14 @@ const StyledDiv = styled.div`
     padding: 16px 69px 13px;
     opacity: 0.9;
     background-color: #fafafa;
+    text-align: center;
+
 
     & h1 {
-       width: 221px;
+        @media only screen and (min-width: 600px) {
+            width: 100%;
+        }
+        width: 221px;
         height: 17px;
         margin: 0 8px 19px;
         white-space: nowrap;
@@ -32,17 +37,35 @@ const StyledDiv = styled.div`
         width: 100%;
 
         &.icons-container {
+            @media only screen and (min-width: 600px) {
+            justify-content: center;
+         }
             display: flex;
             height: 100%;
             justify-content: space-between;
             & img {
                 width: 40px;
                 height: 40px;
-            }
+                @media only screen and (min-width: 600px) {
+                    justify-content: center;
+                    margin-right: 35px;
+                    margin-left: 35px;
+                }
+            }         
         }
         &.text-container{
+            @media only screen and (min-width: 600px) {
+                    justify-content: center;
+            }
             display: flex;
             justify-content: space-between;
+            & p {
+                @media only screen and (min-width: 600px) { 
+                    justify-content: center;
+                    margin-right: 27px;
+                    margin-left: 27px;
+                }
+            }
         }
     }
 

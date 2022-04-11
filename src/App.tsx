@@ -10,20 +10,22 @@ import {
 import HomePage from './pages/HomePage';
 import FullRestaurant from './pages/FullRestaurant';
 import RestaurantsPage from './pages/RestaurantsPage';
+import AllChefsPage from './pages/AllChefsPage';
 
 function App() {
   return (
     <>
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path='/' element={<Navigate to='/home' />} />
-          <Route path='/home' element={<HomePage />} />
-          <Route path='/restaurants' element={<RestaurantsPage />} />
-          <Route path='/:restaurantParam' element={<FullRestaurant />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path='/' element={<Navigate to='/home' />} />
+            <Route path='/home' element={<HomePage />} />
+            <Route path='/restaurants' element={<RestaurantsPage />} />
+            <Route path='/chefs' element={<AllChefsPage />} />
+            <Route path='/:restaurantParam' element={<FullRestaurant />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </>
   );
 }

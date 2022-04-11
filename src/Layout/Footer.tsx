@@ -8,18 +8,30 @@ const StyledFooter = styled.footer`
     width: 100%;
     border-top: solid rgba(0,0,0,0.15);
 
+    @media only screen and (min-width: 600px){
+        flex-direction: row;
+        height: 94px;
+        justify-content: center;
+    }
+
     & div.text-container{
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: inherit;
         justify-content: center;
-
+        @media only screen and (min-width: 600px){
+            margin-top: 20px;
+            width: auto;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
         & span{
             width: 100%;
             height: 15px;
             margin: 0 7px 18px 8px;
-            font-family: HelveticaNeue;
+            font-family: HelveticaNeue-thin;
             font-size: 12px;
             font-weight: 100;
             font-stretch: normal;

@@ -8,6 +8,7 @@ import { changeDisplayStatus } from "../../store/store";
 
 const StarDishDiv = styled.div<{ isSmall: boolean }>`
     display: flex;
+    z-index: 8;
     flex-flow: column;
     width: 259.2px;
     width: ${props => props.isSmall ? '157px' : '259.2px'};
@@ -16,6 +17,11 @@ const StarDishDiv = styled.div<{ isSmall: boolean }>`
     margin-right: 10px;
     margin-left: 10px;
     text-align: center;
+    @media only screen and (min-width: 600px) {
+        background-color: ${colors.beige};
+        cursor: pointer;
+    }
+
     & img {
         &.main-image{
             width: inherit;
@@ -110,16 +116,15 @@ const DishCard: React.FC<Props> = (props) => {
     }
 
     const onClickHandler = () => {
-        dispatch(changeDisplayStatus(props.dish))
+        window.scrollTo(0, 0);
+        dispatch(changeDisplayStatus(props.dish));
     }
 
     return (
         <StarDishDiv onClick={onClickHandler} isSmall={props.isSmall}>
             <img src={props.dish.image} className="main-image" alt='food' />
-            {/* <article> */}
             <h1 className="name">{props.dish.name}</h1>
             <section className="description"><p className="description">{mapIngredients()}</p></section>
-            {/* </article> */}
             <div className="to-bottom">
                 {props.dish.comment ? <img src={selectCommentIcon(props.dish.comment)} className="comment-image" alt={props.dish.comment.toString()} /> : <div className="empty-box" />}
                 <span className="price-section">
