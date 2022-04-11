@@ -13,7 +13,7 @@ const StyledRectangle = styled.div`
     align-items: center;
     height: 269px;
     background-image: url(${mainImage});
-    background-size: cover;
+    background-size: cover;   
     @media only screen and (min-width: 600px){
         height: 696px;
     }

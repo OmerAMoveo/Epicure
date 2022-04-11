@@ -13,7 +13,7 @@ import { changeDisplayStatus } from "../store/store";
 
 const HomePageWrapper = styled.div<{ isDark: boolean }>`
     display: flex;
-    width: inherit;
+    width: 100vw;
     flex-direction: column;
     justify-items: center;
     overflow: hidden;

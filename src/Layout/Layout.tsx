@@ -14,7 +14,7 @@ const Layout: React.FC<Props> = (props) => {
         <>
             {showMenu && <OpeningMenu hamburgerClicked={showMenu} setHamburgerClicked={setShowMenu} />}
             <MainNavigation hamburgerClicked={showMenu} setHamburgerClicked={setShowMenu} />
-            {!showMenu && <body>{props.children}</body>}
+            {!showMenu && <div>{props.children}</div>}
             <Footer />
         </>
     );

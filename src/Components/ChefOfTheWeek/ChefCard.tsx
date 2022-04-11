@@ -12,8 +12,9 @@ const StyledDiv = styled.div`
     justify-content: space-around;
     text-align: center;
     width: 100%;
-    padding-left: 52px;
-
+    @media only screen and (min-width: 600px){
+        padding-left: 52px;
+    }
     & section.chef-details-rectangle {
         @media only screen and (min-width: 600px){
             display: flex;
@@ -68,8 +69,9 @@ const StyledDiv = styled.div`
                 font-weight: bold;
                 text-align: center;
                 @media only screen and (min-width: 600px){
-                    width: 433px;
+                    width: 390px;
                     margin: 42px 1px 59px 0;
+                    margin-left: 0;
                     object-fit: contain;
                 }
                 & p{
@@ -82,6 +84,7 @@ const StyledDiv = styled.div`
                     font-style: normal;
                     line-height: normal;
                     letter-spacing: 1.07px;
+                    
                 }
             }
         }
@@ -90,7 +93,6 @@ const StyledDiv = styled.div`
             @media only screen and (min-width: 600px){
                 display: flex;
                 justify-content:flex-start;
-                /* margin-left: ${marginRight}; */
             }
         }
     }
@@ -141,7 +143,7 @@ const ChefCard: React.FC<Props> = (props) => {
     }, [])
     const mapRestaurants = () => {
         const retValue = memoizedRestaurants.map(singleRestaurant => {
-            return <RestaurantCard restaurant={singleRestaurant} displayChef={false} color={colors.beige} isSmall={true} />
+            return <RestaurantCard key={singleRestaurant.id} restaurant={singleRestaurant} displayChef={false} color={colors.beige} isSmall={true} />
         })
         return retValue;
 
