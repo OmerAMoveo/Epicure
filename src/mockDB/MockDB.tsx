@@ -27,6 +27,13 @@ export type restaurant = {
     bigImage: string,
     smallImage: string,
     rating: number,
+    cuisine: Cuisine,
+}
+export enum Cuisine {
+    Asian = 1,
+    Israeli,
+    Italian,
+    Seafood,
 }
 
 export enum Meal {
@@ -90,6 +97,7 @@ export const Restaurants: restaurant[] = [
         bigImage: '',
         smallImage: claroimage,
         rating: 8.8,
+        cuisine: Cuisine.Israeli,
     },
 
     {
@@ -107,6 +115,8 @@ export const Restaurants: restaurant[] = [
         bigImage: '',
         smallImage: luminaimage,
         rating: 8.5,
+        cuisine: Cuisine.Seafood,
+
     },
 
     {
@@ -124,6 +134,8 @@ export const Restaurants: restaurant[] = [
         bigImage: '',
         smallImage: tigerliliimage,
         rating: 8.5,
+        cuisine: Cuisine.Asian,
+
     },
 
     {
@@ -142,6 +154,7 @@ export const Restaurants: restaurant[] = [
         bigImage: '',
         smallImage: '',
         rating: 9.4,
+        cuisine: Cuisine.Italian,
     },
 
     {
@@ -158,6 +171,7 @@ export const Restaurants: restaurant[] = [
         bigImage: '',
         smallImage: claroimage,
         rating: 9.1,
+        cuisine: Cuisine.Italian,
     },
 
     {
@@ -175,6 +189,8 @@ export const Restaurants: restaurant[] = [
         bigImage: '',
         smallImage: claroimage,
         rating: 9.1,
+        cuisine: Cuisine.Israeli,
+
     }
 
 ]
@@ -432,6 +448,17 @@ export const getDishes = () => {
 
 export const getChef = () => {
     return Chefs;
+}
+
+export const getCuisines = () => {
+    const returnedVal = (Object.keys(Cuisine) as (keyof typeof Cuisine)[]).map(key => {
+
+        return { text: Cuisine[key].toString() };
+    },
+    );
+    console.log(returnedVal);
+    return returnedVal;
+
 }
 
 export const selectCommentIcon = (dishComment: Comment) => {
