@@ -20,7 +20,7 @@ const HomePageWrapper = styled.div<{ isDark: boolean }>`
     @media only screen and (max-width: 600px){
         display: ${props => props.isDark ? 'flex' : 'none'};
         position: ${props => props.isDark ? 'absolute' : 'none'};
-        background-color: ${props => props.isDark ? 'black' : 'none'};
+
     }
 
 `

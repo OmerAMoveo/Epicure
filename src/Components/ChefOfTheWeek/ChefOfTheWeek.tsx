@@ -5,21 +5,12 @@ import { chef, getChef, getRestaurants } from "../../mockDB/MockDB";
 import RestaurantCard from "../RestaurantCard";
 import ChefCard from "./ChefCard";
 
-const marginRight = '218px';
-
 const WeekChefDiv = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
     width: 100%;
-
-    & section.chef-details-rectangle {
-        @media only screen and (min-width: 600px){
-            display: flex;
-            flex-direction: row;
-        }
-    }
 
     & h1{
         width: inherit;
@@ -34,96 +25,6 @@ const WeekChefDiv = styled.div`
             height: 35px;
             font-size: 30px;
             letter-spacing: 2px;
-        }
-    }
-
-    & div{
-        display: inherit;
-        width: inherit;
-        justify-content: space-around;
-
-        &.container{
-            position: relative;
-            & img.chef-image {
-                object-fit: contain;
-                width: inherit;
-                @media only screen and (min-width: 600px){
-                    width: 433px;
-                    height: 338px;
-                    margin: 42px 1px 59px ${marginRight};
-                    object-fit: contain;
-                }
-            }
-            & div.tag{
-                width: inherit;
-                position: absolute;
-                height: 54px;
-                bottom: 0px;
-                background-color: rgba(255, 255, 255, 0.8);
-                color: black;
-                font-weight: bold;
-                text-align: center;
-                @media only screen and (min-width: 600px){
-                    width: 433px;
-                    margin: 42px 1px 59px 218px;
-                    object-fit: contain;
-                }
-                & p{
-                    width: 100%;
-                    margin: 10px;
-                    font-family: HelveticaNeue;
-                    font-size: 30px;
-                    font-weight: normal;
-                    font-stretch: normal;
-                    font-style: normal;
-                    line-height: normal;
-                    letter-spacing: 1.07px;
-                }
-            }
-        }
-        &.restaurants-container{
-            overflow-x: scroll;
-            @media only screen and (min-width: 600px){
-                display: flex;
-                justify-content:flex-start;
-                margin-left: ${marginRight};
-            }
-        }
-    }
-
-    & p
-    {
-        &.description{
-            width: 325px;
-            height: 183px;
-            padding-left: 20px;
-            padding-right: 20px;
-            font-family: HelveticaNeue-thin;
-            font-size: 13.5px;
-            font-weight: 100;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: normal;
-            letter-spacing: 1.04px;
-            text-align: center;
-            color: black;
-            @media only screen and (min-width: 600px){
-                width: 100%;
-                height: 292px;
-                margin: 37px 180px 110px 20px;
-                font-size: 25px;
-                line-height: 1.2;
-                letter-spacing: 1.08px;
-                text-align: justify;
-                overflow-y: scroll;
-                color: black;
-            }
-        }
-        &.chef-restaurants-headline{
-            align-self: flex-start;
-            @media only screen and (min-width: 600px) {
-                margin-left: ${marginRight};
-            }
         }
     }
 `

@@ -12,6 +12,7 @@ const StyledDiv = styled.div`
     justify-content: space-around;
     text-align: center;
     width: 100%;
+    padding-left: 52px;
 
     & section.chef-details-rectangle {
         @media only screen and (min-width: 600px){
@@ -33,6 +34,7 @@ const StyledDiv = styled.div`
             height: 35px;
             font-size: 30px;
             letter-spacing: 2px;
+            border: red;
         }
     }
 
@@ -43,13 +45,16 @@ const StyledDiv = styled.div`
 
         &.container{
             position: relative;
+            display: flex;
+            justify-items: flex-start;
+            justify-content: flex-start;
+            align-content: flex-start;
             & img.chef-image {
                 object-fit: contain;
                 width: inherit;
                 @media only screen and (min-width: 600px){
-                    width: 433px;
                     height: 338px;
-                    margin: 42px 1px 59px ${marginRight};
+                    margin: 42px 1px;
                     object-fit: contain;
                 }
             }
@@ -64,7 +69,7 @@ const StyledDiv = styled.div`
                 text-align: center;
                 @media only screen and (min-width: 600px){
                     width: 433px;
-                    margin: 42px 1px 59px 218px;
+                    margin: 42px 1px 59px 0;
                     object-fit: contain;
                 }
                 & p{
@@ -85,7 +90,7 @@ const StyledDiv = styled.div`
             @media only screen and (min-width: 600px){
                 display: flex;
                 justify-content:flex-start;
-                margin-left: ${marginRight};
+                /* margin-left: ${marginRight}; */
             }
         }
     }
@@ -100,14 +105,11 @@ const StyledDiv = styled.div`
             font-family: HelveticaNeue-thin;
             font-size: 13.5px;
             font-weight: 100;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: normal;
             letter-spacing: 1.04px;
             text-align: center;
             color: black;
             @media only screen and (min-width: 600px){
-                width: 100%;
+                width: 500px;
                 height: 292px;
                 margin: 37px 180px 110px 20px;
                 font-size: 25px;
@@ -121,7 +123,7 @@ const StyledDiv = styled.div`
         &.chef-restaurants-headline{
             align-self: flex-start;
             @media only screen and (min-width: 600px) {
-                margin-left: ${marginRight};
+                /* margin-left: ${marginRight}; */
             }
         }
     }
