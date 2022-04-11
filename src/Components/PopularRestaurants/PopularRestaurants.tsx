@@ -30,8 +30,6 @@ const StyledDiv = styled.div`
     text-align: center;
     margin-top: 20px;
 
-    
-
     & h3 {
         font-family: HelveticaNeue-Thin;
         font-size: 30px;

@@ -4,13 +4,16 @@ import styled from "styled-components";
 const StyledDiv = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;;
+    width: 100%;
     margin: inherit;
+    cursor: default;
+
     & h3 {
         height: 18px;
         margin: 0 0 10px;
         margin-left: 52px;
         margin-top: 10px;
+        margin-bottom: -10px;
         opacity: 0.5;
         font-family: HelveticaNeue;
         font-size: 15px;
@@ -29,9 +32,11 @@ const StyledDiv = styled.div`
             font-family: HelveticaNeue-thin;
             font-weight: 100;
             margin-left: 30px;
-            margin-top: -10px;
+            margin-top: 10px;
             letter-spacing: 1.07px;
             color: black;
+            cursor: pointer;
+
             }
     }
 `
@@ -43,7 +48,6 @@ type Props = {
 }
 
 const SearchField: React.FC<Props> = (props) => {
-
 
     const mapListItemsElements = useCallback(() => {
         const mappedElements = props.mappedData.map((item, index) => <li key={index}>{item[props.displayedField]}</li>);

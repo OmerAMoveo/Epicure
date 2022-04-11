@@ -5,7 +5,6 @@ import { default as searchIcon } from '../../images/search-icon.svg'
 import SearchDetails from './SearchDetails';
 import { useState } from 'react';
 
-
 const StyledRectangle = styled.div`
     display: flex;
     justify-items: center;
@@ -13,7 +12,7 @@ const StyledRectangle = styled.div`
     align-items: center;
     height: 269px;
     background-image: url(${mainImage});
-    background-size: cover;
+    background-size: cover;   
     @media only screen and (min-width: 600px){
         height: 696px;
     }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { dish, getDishes, getRestaurants, restaurant } from "../../mockDB/MockDB";
+import { chef, Cuisine, dish, getChef, getCuisines, getDishes, getRestaurants, restaurant } from "../../mockDB/MockDB";
 import SearchField from "./SearchField";
 
 type Props = {
@@ -9,10 +9,10 @@ type Props = {
 
 const StyledDiv = styled.div`
     display: flex;
-    height: 150px;
+    flex-direction: column;
+    /* height: 150px; */
     max-height: 250px; 
     width: inherit;
-    /* overflow-y: scroll; */
     background-color: white;
 
 `
@@ -20,17 +20,24 @@ const StyledDiv = styled.div`
 const SearchDetails: React.FC<Props> = (props) => {
 
     const [allRestaurants, setAllRestaurants] = useState<restaurant[]>(getRestaurants());
-    const [allDishes, setAllDishes] = useState<dish[]>(getDishes());
-    const [displayedRestaurants, setDisplayedRestaurants] = useState<restaurant[]>(allRestaurants.filter(restaurant => restaurant.name.toLowerCase().startsWith(props.query)))
-    const [displayedDishes, setdisplayedDishes] = useState<dish[]>(allDishes.filter(dish => dish.name.toLowerCase().startsWith(props.query)));
+    const [allChefs, setAllChefs] = useState<chef[]>(getChef());
+    const [Cuisines, setCuisines] = useState<{ text: string }[]>(getCuisines());
 
+    const [displayedRestaurants, setDisplayedRestaurants] = useState<restaurant[]>(allRestaurants.filter(restaurant => restaurant.name.toLowerCase().startsWith(props.query)))
+    const [displayedChefs, setDisplayedChefs] = useState<chef[]>(allChefs.filter(chef => chef.name.toLowerCase().startsWith(props.query.toLowerCase())))
+    const [displayedCuisine, setDisplayedCuisines] = useState<{ text: string }[]>(Cuisines.filter(cuisine => cuisine.text.toLowerCase().startsWith(props.query.toLowerCase())));
 
     return (
         <StyledDiv>
             <SearchField headline="restaurants"
                 displayedField="name"
                 mappedData={displayedRestaurants} />
-
+            <SearchField headline="chefs"
+                displayedField="name"
+                mappedData={displayedChefs} />
+            <SearchField headline="cuisines"
+                displayedField="text"
+                mappedData={displayedCuisine} />
         </StyledDiv>
     );
 }

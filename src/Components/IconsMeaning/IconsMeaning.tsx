@@ -68,8 +68,6 @@ const StyledDiv = styled.div`
             }
         }
     }
-
-
 `
 
 const IconsMeanings: React.FC = () => {

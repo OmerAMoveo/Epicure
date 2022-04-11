@@ -79,6 +79,7 @@ export const StyledOpeningMenu = styled.div`
         }
     }
 `
+
 type Props = {
     hamburgerClicked: boolean,
     setHamburgerClicked: Dispatch<SetStateAction<boolean>>
