@@ -13,7 +13,8 @@ const RestaurantCardDiv = styled.div<{ color: string, isSmall: boolean }>`
     margin-bottom: 20px;
     flex-direction: column;
     text-align:center;
-    background-color: ${props => props.color};   
+    background-color: ${props => props.color};
+
     @media only screen and (min-width: 600px) {
         background-color: ${colors.beige};
         position: relative;
@@ -35,7 +36,6 @@ const RestaurantCardDiv = styled.div<{ color: string, isSmall: boolean }>`
         width: 100%;
         margin: 0;
         font-family: HelveticaNeue;
-        /* font-size: 25px; */
         font-size: ${props => props.isSmall ? '17px' : '25px'};
         font-weight: bold;
         font-stretch: normal;
