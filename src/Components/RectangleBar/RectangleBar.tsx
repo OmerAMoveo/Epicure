@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colors } from '../../GlobalStyle';
 import { default as searchIcon } from '../../images/search-icon.svg'
 import SearchDetails from './SearchDetails';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 
 
 const StyledRectangle = styled.div`
@@ -14,20 +14,30 @@ const StyledRectangle = styled.div`
     height: 269px;
     background-image: url(${mainImage});
     background-size: cover;
+    @media only screen and (min-width: 600px){
+        height: 696px;
+    }
 
-    & div {        
-        &.middleBar{
+    & div {       
+        &.middle-bar{
             height: 125px;
             padding: 20px;
             margin-left:0px;
             margin-right:0px;
             background-color: rgba(255,255,255,0.88);
+            @media only screen and (min-width: 600px){
+                display: flex;
+                flex-direction: column;
+                height: 222px;
+                width: 781px;
+                justify-content: center;
+                align-items: center;
+            }
 
             & p {
                 width: 220px;
-                height: 39px;
                 margin: 0 31px 13px 36px;
-                font-family: HelveticaNeue;
+                font-family: HelveticaNeue-thin;
                 font-size: 16px;
                 font-weight: 100;
                 font-stretch: normal;
@@ -36,10 +46,13 @@ const StyledRectangle = styled.div`
                 letter-spacing: 1px;
                 text-align: center;
                 color: black;
-            }
-            
-            
+                @media only screen and (min-width: 600px){
+                    font-size: 35px;
+                    width: 437px;
+                }
+            }        
         }
+
         &.search-box{
             display: flex;
             justify-content: space-evenly;
@@ -47,10 +60,16 @@ const StyledRectangle = styled.div`
             width: 269px;
             height: 33px;
             margin: 13px 0 0;
+            opacity: 0.53;
             padding: 8px 19px 8px 9px;
             border-radius: 4px;
             border: solid 0.2px black;
             background-color: ${colors.white_11}; 
+            @media only screen and (min-width: 600px) {      
+                width: 367px;
+                font-size: 22px;
+                letter-spacing: 1.57px;
+            }
 
             & input {
                 width: 269px;
@@ -59,18 +78,18 @@ const StyledRectangle = styled.div`
                 background-color: ${colors.white_11}; 
                 border: none;
             }
+
             & input:focus, textarea:focus {
-                border: none;;
+                border: none;
                 box-shadow: none;
                 outline-offset: 0px;
                 outline: none;
             }
 
             & img{
-                    margin-right: 8px;
-                }
+                margin-right: 8px;
+            }
         }
-
     }
 `
 
@@ -89,19 +108,21 @@ const RectangleBar: React.FC = () => {
 
     return (
         <StyledRectangle>
-            <div className='middleBar'>
-                <p className='epicure-description'>Epicure works with the top chef restaurants in Tel Aviv</p>
-                <div className='search-box'>
-                    <img src={searchIcon} alt="search-icon" />
-                    <input type="search"
-                        id="query"
-                        name="q"
-                        placeholder='Search for restaurant cuisine, chef'
-                        onInput={onQueryChange}
-                        autoComplete="off"
-                    ></input>
+            <div className='centered-box'>
+                <div className='middle-bar'>
+                    <p className='epicure-description'>Epicure works with the top chef restaurants in Tel Aviv</p>
+                    <div className='search-box'>
+                        <img src={searchIcon} alt="search-icon" />
+                        <input type="search"
+                            id="query"
+                            name="q"
+                            placeholder='Search for restaurant cuisine, chef'
+                            onInput={onQueryChange}
+                            autoComplete="off"
+                        ></input>
+                    </div>
+                    {showQueryResults && <SearchDetails query={searchQuery} />}
                 </div>
-                {showQueryResults && <SearchDetails query={searchQuery} />}
             </div>
         </StyledRectangle >
     );

@@ -14,6 +14,10 @@ const RestaurantCardDiv = styled.div<{ color: string, isSmall: boolean }>`
     flex-direction: column;
     text-align:center;
     background-color: ${props => props.color};   
+    @media only screen and (min-width: 600px) {
+        background-color: ${colors.beige};
+        position: relative;
+    }
 
     & img {
         width: ${props => props.isSmall ? '153.6px' : '206px'};
@@ -43,7 +47,7 @@ const RestaurantCardDiv = styled.div<{ color: string, isSmall: boolean }>`
 
         & h2 {  
             margin: 4px 0 0;
-            font-family: HelveticaNeue;
+            font-family: HelveticaNeue-thin;
             font-size: 20px;
         font-size: ${props => props.isSmall ? '13.3px' : '20px'};
 
@@ -69,13 +73,13 @@ const RestaurantCard: React.FC<Props> = (props: Props) => {
 
     return (
         <Link to={`/${props.restaurant.name}`}>
-          <RestaurantCardDiv color={props.color} isSmall={props.isSmall}>
-              <img src={props.restaurant.smallImage} alt={`${props.restaurant.smallImage}`} />
-              <section>
-                  <h1>{props.restaurant.name}</h1>
-                  {props.displayChef && <h2>{props.restaurant.chef}</h2>}
-              </section>
-          </RestaurantCardDiv>
+            <RestaurantCardDiv color={props.color} isSmall={props.isSmall}>
+                <img src={props.restaurant.smallImage} alt={`${props.restaurant.smallImage}`} />
+                <section>
+                    <h1>{props.restaurant.name}</h1>
+                    {props.displayChef && <h2>{props.restaurant.chef}</h2>}
+                </section>
+            </RestaurantCardDiv>
         </Link>
     );
 }

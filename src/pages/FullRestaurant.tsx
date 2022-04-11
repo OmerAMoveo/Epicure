@@ -26,7 +26,7 @@ const StyledDiv = styled.div`
     & h2 {
         height: 28px;
         margin: 0;
-        font-family: HelveticaNeue;
+        font-family: HelveticaNeue-thin;
         font-size: 24px;
         font-weight: normal;
         letter-spacing: 1.6px;
@@ -38,10 +38,19 @@ const StyledDiv = styled.div`
             flex-direction: row;
             width: 100%;
             justify-content: center;
+            font-family: HelveticaNeue-thin;    
         }
     }
 
     & img {
+        &.restaurant-image{
+            @media only screen and (min-width: 600px){
+                height: 395px;
+                width: 1102px;
+                object-fit: contain;
+            }
+        }
+
         &.clock {
             margin-right: 7px;
         }
@@ -57,11 +66,12 @@ const StyledDiv = styled.div`
             & div.meal-time p {
                 width: 100%;
                 height: 20px;
-                font-family: HelveticaNeue;
+                font-family: HelveticaNeue-thin;    
                 margin: 10px 5px 10px 5px;
                 font-size: 17px;
                 font-weight: 100;
                 letter-spacing: 1.21px;
+                cursor: default;
                 color: black;
 
                 &:active,:hover {
@@ -154,7 +164,7 @@ const FullRestaurant: React.FC = () => {
             {dishDisplay && <DishModal />}
             {showAll &&
                 <StyledDiv>
-                    <img src={restaurant?.smallImage} className='main-image' alt={`${restaurant?.name} photo`}></img>
+                    <img src={restaurant?.smallImage} className='restaurant-image' alt={`${restaurant?.name} photo`}></img>
                     <h1>{restaurant?.name}</h1>
                     <h2>{restaurant?.chef}</h2>
                     <span className="open-container">

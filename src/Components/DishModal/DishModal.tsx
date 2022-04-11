@@ -13,10 +13,18 @@ const StyledDishModal = styled.div`
     align-items: center;
     background-color: white;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    justify-self: center;
     top: 0;
 
+    @media only screen and (min-width: 600px) {
+        /* position: fixed; */
+        z-index: 10;
+        width: 30%;
+        right: 30%;
+        left: 30%;
+        margin-top: 53px;
+        padding-bottom: 10px;
+    }
     & div {
         &.empty-box{
             margin-left: auto; 
@@ -300,4 +308,3 @@ const DishModal: React.FC = () => {
 }
 
 export default DishModal;
-

@@ -16,6 +16,10 @@ const StyledDiv = styled.div`
     border-radius: 6.7px;
     border: solid 0.5px black;
 
+    @media only screen and (min-width: 600px) {
+        margin-right: 10px;
+    }
+
     & img.icon {
         width: 17px;
         height: 22px;
