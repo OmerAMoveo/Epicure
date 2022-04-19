@@ -73,7 +73,7 @@ const RestaurantCard: React.FC<Props> = (props: Props) => {
     return (
         <Link to={`/${props.restaurant.name}`}>
             <RestaurantCardDiv color={props.color} isSmall={props.isSmall}>
-                <img src={props.restaurant.smallImage} alt={`${props.restaurant.smallImage}`} />
+                <img src={require(`../images/${props.restaurant.smallImage}`)} alt={`${props.restaurant.smallImage}`} />
                 <section>
                     <h1>{props.restaurant.name}</h1>
                     {props.displayChef && <h2>{props.restaurant.chef}</h2>}

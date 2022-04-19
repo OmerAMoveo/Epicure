@@ -122,7 +122,7 @@ const DishCard: React.FC<Props> = (props) => {
 
     return (
         <StarDishDiv onClick={onClickHandler} isSmall={props.isSmall}>
-            <img src={props.dish.image} className="main-image" alt='food' />
+            <img src={require(`../../images/${props.dish.image}`)} className="main-image" alt='food' />
             <h1 className="name">{props.dish.name}</h1>
             <section className="description"><p className="description">{mapIngredients()}</p></section>
             <div className="to-bottom">

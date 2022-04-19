@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import DishCard from "../DishCard/DishCard";
-import { getDishes, getRestaurants } from "../../mockDB/MockDB";
-import { useCallback, useMemo } from "react";
+import { dish, restaurant } from "../../mockDB/MockDB";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { RootStateOrAny, useSelector } from "react-redux";
+import { getAllRestaurants } from "../../service/service";
 
 
 const StyledTable = styled.table`
@@ -54,24 +56,32 @@ const StyledPopularDishes = styled.div`
 `
 
 const PopularDishes: React.FC = () => {
-    const memoizedRestaurants = useMemo(() => { return getRestaurants() }, [])
-    //on real-version: randomize x restaurants for mapping if it's okay for Shilo
+
+    // const memoizedRestaurants: restaurant[] = useMemo(async () => {
+    //     const allRestaurant: restaurant[] = await getAllRestaurants();
+    //     return allRestaurant;
+    // }, []);
+    const allRestaurants: dish[] = useSelector((state: RootStateOrAny) => state.displayDish.allRestaurants);
+    const allDishes: dish[] = useSelector((state: RootStateOrAny) => state.displayDish.allDishes);
+    const [renderedAllDishes, setRenderedAllDishes] = useState<dish[]>([]);
+
+
+    useEffect(() => {
+        setRenderedAllDishes(allDishes);
+    }, [allDishes]);
 
     const dishesTableHeader = useCallback(() => {
-
-        return memoizedRestaurants.map((singleRestaurant) => <th key={singleRestaurant.id}>{singleRestaurant.name}</th>)
-    }, []);
+        return allRestaurants.map((singleRestaurant, index) => <th key={index}>{String(singleRestaurant.name)}</th>)
+    }, [allDishes]);
 
     const dishTableCards = useCallback(() => {
-        const uniqueDishes = getDishes();
-        let counter = 0;
-        return uniqueDishes.map(singleDish => singleDish.isSignatureDish ?
-            <td key={singleDish.restaurantId}
+        return renderedAllDishes.map((singleDish, index) => singleDish.isSignatureDish ?
+            <td key={index}
                 id={singleDish.restaurantId.toString()}>
                 <DishCard dish={singleDish} isSmall={false} />
             </td> : null)
-    }, []);
-    
+    }, [renderedAllDishes]);
+
     return (
         <>
             <CenteredH3>SIGNATURE DISH OF:</CenteredH3>

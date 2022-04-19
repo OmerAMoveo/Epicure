@@ -130,14 +130,14 @@ const AboutUs: React.FC = () => {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a lacus vel justo fermentum bibendum non eu ipsum.
                     Cras porta malesuada eros, eget blandit turpis suscipit at.  Vestibulum sed massa in magna sodales porta.  Vivamus elit urna, dignissim a vestibulum.
                 </span>
-                <img className="about---logo" src={EpicureLogo} />
+                <img className="about---logo" src={EpicureLogo} alt="logo" />
                 <div className="get-it-container">
                     <GetItIcon fromHeadline="Download on the" from="App Store" icon={AppleLogo} />
                     <GetItIcon fromHeadline="Get it on" from="Google Play" icon={googleLogo} />
                 </div>
             </section>
             <div className="float-right-container">
-                <img className="float-right-logo" src={EpicureLogo} />
+                <img className="float-right-logo" src={EpicureLogo} alt="floating logo" />
             </div>
         </StyledDiv>
     );

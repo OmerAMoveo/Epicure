@@ -57,7 +57,7 @@ const StyledDiv = styled.div`
 const GetItIcon: React.FC<Props> = (props) => {
     return (
         <StyledDiv>
-            <img className="icon" src={props.icon} />
+            <img className="icon" src={props.icon} alt="icon"/>
             <div className="text-container">
                 <span className="from-headline">{props.fromHeadline}</span>
                 <span className="from">{props.from}</span>

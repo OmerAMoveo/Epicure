@@ -40,7 +40,6 @@ const HomePage: React.FC = () => {
 
     const [showAll, setShowAll] = useState(false);
     const dishDisplay = useSelector((state: RootStateOrAny) => state.displayDish.toShowDish);
-    const dispatch = useDispatch();
 
     useEffect(() => {
         //shall be an 'or' boolean of all modals-selectors
@@ -58,7 +57,7 @@ const HomePage: React.FC = () => {
                 <PopularRestaurants />
                 <PopularDishes />
                 <IconsMeanings />
-                <ChefOfTheWeek />
+                {/* <ChefOfTheWeek /> */}
                 <AboutUs />
             </HomePageWrapper>
 

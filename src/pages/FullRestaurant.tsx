@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { dish, getDishes, getRestaurants, Meal, restaurant } from "../mockDB/MockDB";
+import { dish, Meal, restaurant } from "../mockDB/MockDB";
 import { default as clockIcon } from '../images/clock-icon.svg'
-import { isRestaurantOpen, setCurrTime } from "../service/service";
+import { getRestaurantByName, isRestaurantOpen, setCurrTime } from "../service/service";
 import DishCard from "../Components/DishCard/DishCard";
 import { RootStateOrAny, useSelector } from "react-redux";
 import DishModal from "../Components/DishModal/DishModal";
@@ -95,33 +95,34 @@ const FullRestaurant: React.FC = () => {
     const { restaurantParam } = useParams();
 
     const dishDisplay = useSelector((state: RootStateOrAny) => state.displayDish.toShowDish);
+    const allDishes: dish[] = useSelector((state: RootStateOrAny) => state.displayDish.allDishes)
 
     const [showAll, setShowAll] = useState(false);
     const [restaurant, setRestaurant] = useState<restaurant | null>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [displayedElement, setDisplayElement] = useState<JSX.Element[]>([]);
     const [timeSelected, setTimeSelected] = useState<Meal>(setCurrTime());
-    const [allDishes, setAllDishes] = useState<dish[]>();
     const [displayedDishes, setDisplayedDishes] = useState<dish[]>([]);
 
+
     useEffect(() => {
-        //shall be an 'or' boolean of all modals-selectors
         setShowAll(!(dishDisplay))
     }, [dishDisplay]);
 
     useEffect(() => {
-        const allRestaurants = getRestaurants();
-        setAllDishes(getDishes());
-        setRestaurant(
-            allRestaurants.filter(singleRestaurant => singleRestaurant.name === restaurantParam)[0]
-        );
+        const getRestaurant = async () => {
+            const returnedVal = await getRestaurantByName(restaurantParam ? restaurantParam : '');
+            if (returnedVal)
+                setRestaurant(returnedVal)
+        }
+        getRestaurant();
         setIsOpen(isRestaurantOpen(restaurant));
     }, [])
 
     const reduceDishesArray = useCallback((currMeal: Meal) => {
         const newDishArray: dish[] = [];
         setDisplayedDishes([]);
-        allDishes?.forEach(dish => {
+        allDishes.forEach(dish => {
             if (isMealContained(dish.meal, currMeal) && dish.restaurantId === restaurant?.id) {
                 newDishArray.push(dish);
             }
@@ -164,7 +165,7 @@ const FullRestaurant: React.FC = () => {
             {dishDisplay && <DishModal />}
             {showAll &&
                 <StyledDiv>
-                    <img src={restaurant?.smallImage} className='restaurant-image' alt={`${restaurant?.name} photo`}></img>
+                    <img src={require(`../images/${restaurant?.smallImage}`)} className='restaurant-image' alt={`${restaurant?.name} photo`}></img>
                     <h1>{restaurant?.name}</h1>
                     <h2>{restaurant?.chef}</h2>
                     <span className="open-container">

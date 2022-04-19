@@ -214,6 +214,7 @@ const DishModal: React.FC = () => {
     const dispatch = useDispatch();
     const theDisplayedDish = useSelector((state: RootStateOrAny) => state.displayDish.dish);
     const cart = useSelector((state: RootStateOrAny) => state.auth.cart);
+    console.log(theDisplayedDish);
 
     const [displayedNumber, setDisplayedNumber] = useState(0);
     const [sideDish, setSideDish] = useState<string | null>(null)
@@ -274,17 +275,17 @@ const DishModal: React.FC = () => {
             <div className="cancel-div">
                 <img className="x" src={x} alt='exit' onClick={xClickedHandler} />
             </div>
-            <img src={theDisplayedDish.image} className="main-image" alt='food' />
-            <p className="dish-name">{theDisplayedDish.name}</p>
+            <img src={require(`../../images/${theDisplayedDish?.image}`)} className="main-image" alt='food' />
+            <p className="dish-name">{theDisplayedDish?.name}</p>
             <p className="description">{mapIngredients(theDisplayedDish)}</p>
-            {theDisplayedDish.comment ?
+            {theDisplayedDish?.comment ?
                 <img src={selectCommentIcon(theDisplayedDish.comment)} className="comment-image" alt={theDisplayedDish.comment.toString()} />
                 : <div className="empty-box" />}
             <div className="price-box">
                 <div className="line-4" />
                 <div className="price">
                     <img src={ilsIcon} alt='nis' className='nis' />
-                    <span>{theDisplayedDish.price}</span>
+                    <span>{theDisplayedDish?.price}</span>
                 </div>
                 <div className="line-4" />
             </div>

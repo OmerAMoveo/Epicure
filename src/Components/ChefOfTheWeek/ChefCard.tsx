@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components"
 import { colors } from "../../GlobalStyle";
-import { chef, getRestaurants } from "../../mockDB/MockDB";
+import { chef, restaurant } from "../../mockDB/MockDB";
+import { getRestaurantsByChefId } from "../../service/service";
 import RestaurantCard from "../RestaurantCard";
 
 const marginRight = '218px';
@@ -136,23 +137,31 @@ type Props = {
 }
 
 const ChefCard: React.FC<Props> = (props) => {
-    const memoizedRestaurants = useMemo(() => {
-        const allRestaurants = getRestaurants();
 
-        return allRestaurants.filter(singleRestaurant => singleRestaurant.chef === props.chef.name)
+    const [chefRestaurants, setChefRestaurants] = useState<restaurant[]>([]);
+    useEffect(() => {
+        const getRestaurantsByCurrChefId = async () => {
+            const returnedVal = await getRestaurantsByChefId(props.chef.id);
+            setChefRestaurants(returnedVal);
+        }
+        getRestaurantsByCurrChefId();
     }, [])
+
+
     const mapRestaurants = () => {
-        const retValue = memoizedRestaurants.map(singleRestaurant => {
+        const retValue = chefRestaurants.map(singleRestaurant => {
             return <RestaurantCard key={singleRestaurant.id} restaurant={singleRestaurant} displayChef={false} color={colors.beige} isSmall={true} />
         })
         return retValue;
 
     }
+    console.log(`../../images/${props.chef.image}`);
+
     return (
         <StyledDiv>
             <section className="chef-details-rectangle">
                 <div className="container">
-                    <img className="chef-image" src={props.chef.image} />
+                    <img className="chef-image" src={require(`../../images/${props.chef.image}`)} />
                     <div className="tag"><p>{props.chef.name}</p></div>
                 </div>
                 <p className="description">{props.chef.description}</p>
