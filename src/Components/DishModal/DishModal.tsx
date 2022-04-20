@@ -274,27 +274,27 @@ const DishModal: React.FC = () => {
             <div className="cancel-div">
                 <img className="x" src={x} alt='exit' onClick={xClickedHandler} />
             </div>
-            <img src={theDisplayedDish.image} className="main-image" alt='food' />
-            <p className="dish-name">{theDisplayedDish.name}</p>
+            <img src={require(`../../images/${theDisplayedDish?.image}`)} className="main-image" alt='food' />
+            <p className="dish-name">{theDisplayedDish?.name}</p>
             <p className="description">{mapIngredients(theDisplayedDish)}</p>
-            {theDisplayedDish.comment ?
+            {theDisplayedDish?.comment ?
                 <img src={selectCommentIcon(theDisplayedDish.comment)} className="comment-image" alt={theDisplayedDish.comment.toString()} />
                 : <div className="empty-box" />}
             <div className="price-box">
                 <div className="line-4" />
                 <div className="price">
                     <img src={ilsIcon} alt='nis' className='nis' />
-                    <span>{theDisplayedDish.price}</span>
+                    <span>{theDisplayedDish?.price}</span>
                 </div>
                 <div className="line-4" />
             </div>
             <h1>Choose a side</h1>
             <form >
-                {theDisplayedDish.sides.length ? InputCheckGenerator('radio', 'sides', 'sides', theDisplayedDish.sides, radioChangeHandler) : <div className="no-items"><p >No sides for this dish.</p></div>}
+                {theDisplayedDish.sides?.length ? InputCheckGenerator('radio', 'sides', 'sides', theDisplayedDish.sides, radioChangeHandler) : <div className="no-items"><p >No sides for this dish.</p></div>}
             </form>
             <h1>Changes</h1>
             <form>
-                {theDisplayedDish.changes.length ? InputCheckGenerator('checkbox', 'changes', 'changes', theDisplayedDish.changes, checkBoxChangeHandler) : <div className="no-items"><p>No changes for this dish.</p></div>}
+                {theDisplayedDish.changes?.length ? InputCheckGenerator('checkbox', 'changes', 'changes', theDisplayedDish.changes, checkBoxChangeHandler) : <div className="no-items"><p>No changes for this dish.</p></div>}
             </form>
             <h1>Quantity</h1>
             <span className="quantity">

@@ -1,15 +1,19 @@
 import { createSlice, configureStore, current } from '@reduxjs/toolkit';
-import { dish } from '../mockDB/MockDB';
-import { deleteItemFromCart, findDish } from '../service/service';
+import { dish, restaurant } from '../mockDB/MockDB';
+import { deleteItemFromCart, findDish, getAllDishes, getAllRestaurants } from '../service/service';
 
 export type displayState = {
     toShowDish: boolean,
     dish: dish | null,
+    allRestaurants: restaurant[],
+    allDishes: dish[],
 }
 
 const initialDisplayState: displayState = {
     toShowDish: false,
     dish: null,
+    allRestaurants: [],
+    allDishes: [],
 }
 
 export const displaySlice = createSlice({
@@ -22,17 +26,34 @@ export const displaySlice = createSlice({
                 state.dish = action.payload.dish;
             }
         },
+        loadRestaurants: (state, action) => {
+            state.allRestaurants = action.payload.restaurants;
+        },
+        loadDishes: (state, action) => {
+            state.allDishes = action.payload.dishes;
+        }
     }
 });
 
-
 export const changeDisplayStatus = (newDish: dish) => {
     return (dispatch: ({ }) => void) => {
-
-        dispatch(displaySlice.actions.showDishHandler({ dish: newDish }))
+        dispatch(displaySlice.actions.showDishHandler({ dish: newDish }));
     };
 }
 
+export const getRestaurants = () => {
+    return async (dispatch: ({ }) => void) => {
+        const allRestaurants = await getAllRestaurants();
+        dispatch(displaySlice.actions.loadRestaurants({ restaurants: allRestaurants }));
+    }
+}
+
+export const getDishes = () => {
+    return async (dispatch: ({ }) => void) => {
+        const allDishes = await getAllDishes();
+        dispatch(displaySlice.actions.loadDishes({ dishes: allDishes }));
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 export type itemInCart = {

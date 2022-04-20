@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components"
 import { colors } from "../../GlobalStyle";
-import { chef, getChef, getRestaurants } from "../../mockDB/MockDB";
+import { chef, getRestaurants, restaurant } from "../../mockDB/MockDB";
+import { getChefById, getRestaurantsByChefId } from "../../service/service";
 import RestaurantCard from "../RestaurantCard";
 import ChefCard from "./ChefCard";
 
@@ -30,14 +31,26 @@ const WeekChefDiv = styled.div`
 `
 
 const ChefOfTheWeek: React.FC = () => {
-    const [chefOfTheWeek, setChefOfTheWeek] = useState<chef>(getChef()[0])
-    const memoizedRestaurants = useMemo(() => {
-        const allRestaurants = getRestaurants();
+    const [chefOfTheWeek, setChefOfTheWeek] = useState<chef | null>(null)
+    const [chefRestaurants, setChefRestaurants] = useState<restaurant[]>([]);
 
-        return allRestaurants.filter(singleRestaurant => singleRestaurant.chef === chefOfTheWeek.name)
-    }, [])
+    useEffect(() => {
+        const getChefOfTheWeek = async () => {
+            const chefOfTheWeekVal = await getChefById(1);
+            setChefOfTheWeek(chefOfTheWeekVal);
+        }
+        const getRestaurantsByCurrChefId = async () => {
+            if (chefOfTheWeek !== null) {
+                const returnedVal = await getRestaurantsByChefId(chefOfTheWeek.id);
+                setChefRestaurants(returnedVal);
+            }
+        }
+        getChefOfTheWeek();
+        getRestaurantsByCurrChefId();
+    }, [chefOfTheWeek])
+
     const mapRestaurants = () => {
-        const retValue = memoizedRestaurants.map(singleRestaurant => {
+        const retValue = chefRestaurants.map(singleRestaurant => {
             return <RestaurantCard restaurant={singleRestaurant} displayChef={false} color={colors.beige} isSmall={true} />
         })
         return retValue;
@@ -46,7 +59,7 @@ const ChefOfTheWeek: React.FC = () => {
     return (
         <WeekChefDiv>
             <h1>CHEF OF THE WEEK :</h1>
-            <ChefCard chef={getChef()[0]} />
+            {chefOfTheWeek && <ChefCard chef={chefOfTheWeek} />}
         </WeekChefDiv>
     );
 }

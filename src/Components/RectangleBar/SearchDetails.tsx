@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { chef, Cuisine, dish, getChef, getCuisines, getDishes, getRestaurants, restaurant } from "../../mockDB/MockDB";
+import { chef, Cuisine, dish, getCuisines, getRestaurants, restaurant } from "../../mockDB/MockDB";
 import SearchField from "./SearchField";
 
 type Props = {
@@ -19,22 +19,22 @@ const StyledDiv = styled.div`
 
 const SearchDetails: React.FC<Props> = (props) => {
 
-    const [allRestaurants, setAllRestaurants] = useState<restaurant[]>(getRestaurants());
-    const [allChefs, setAllChefs] = useState<chef[]>(getChef());
-    const [Cuisines, setCuisines] = useState<{ text: string }[]>(getCuisines());
+    const [allRestaurants] = useState<restaurant[]>(getRestaurants());
+    // const [allChefs] = useState<chef[]>(getChef());
+    const [Cuisines] = useState<{ text: string }[]>(getCuisines());
 
-    const [displayedRestaurants, setDisplayedRestaurants] = useState<restaurant[]>(allRestaurants.filter(restaurant => restaurant.name.toLowerCase().startsWith(props.query)))
-    const [displayedChefs, setDisplayedChefs] = useState<chef[]>(allChefs.filter(chef => chef.name.toLowerCase().startsWith(props.query.toLowerCase())))
-    const [displayedCuisine, setDisplayedCuisines] = useState<{ text: string }[]>(Cuisines.filter(cuisine => cuisine.text.toLowerCase().startsWith(props.query.toLowerCase())));
+    const [displayedRestaurants] = useState<restaurant[]>(allRestaurants.filter(restaurant => restaurant.name.toLowerCase().startsWith(props.query)))
+    // const [displayedChefs] = useState<chef[]>(allChefs.filter(chef => chef.name.toLowerCase().startsWith(props.query.toLowerCase())))
+    const [displayedCuisine] = useState<{ text: string }[]>(Cuisines.filter(cuisine => cuisine.text.toLowerCase().startsWith(props.query.toLowerCase())));
 
     return (
         <StyledDiv>
             <SearchField headline="restaurants"
                 displayedField="name"
                 mappedData={displayedRestaurants} />
-            <SearchField headline="chefs"
+            {/* <SearchField headline="chefs"
                 displayedField="name"
-                mappedData={displayedChefs} />
+                mappedData={displayedChefs} /> */}
             <SearchField headline="cuisines"
                 displayedField="text"
                 mappedData={displayedCuisine} />

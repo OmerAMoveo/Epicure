@@ -1,9 +1,10 @@
 import RestaurantCard from "../RestaurantCard";
 import styled from "styled-components";
-import { useCallback, useEffect, useState } from "react";
-import { getRestaurants, restaurant } from "../../mockDB/MockDB";
+import { useEffect, useState } from "react";
+import { restaurant } from "../../mockDB/MockDB";
 import { colors } from "../../GlobalStyle";
 import { Link } from "react-router-dom";
+import { getPopularRestaurants } from "../../service/service";
 
 
 const WrapperDiv = styled.div`
@@ -77,32 +78,39 @@ const StyledDiv = styled.div`
 
 const PopularRestaurants: React.FC = () => {
 
-    const [favoriteRestaurants, setFavoriteRestaurants] = useState<restaurant[]>([]);
+    const [favoriteRestaurants, setFavoriteRestaurants] = useState<restaurant[] | null>(null);
+    const [mappedCards, setMappedCards] = useState([<></>]);
+    useEffect(() => {
+        (async () => {
+            const populars = await getPopularRestaurants();
+            setFavoriteRestaurants(populars);
+        })();
+        // const getPopular = async () => {
+        //     const populars = await getPopularRestaurants();
+        //     setFavoriteRestaurants(populars);
+        // }
+        // getPopular();
+    }, [])
 
     useEffect(() => {
-        const newFavoriteRestaurants = getRestaurants().sort((restA: restaurant, restB: restaurant) => {
-            return restA.rating - restB.rating;
-        }).slice(0, 3)
-        setFavoriteRestaurants(newFavoriteRestaurants)
-    }, []);
-
-
-
-    const mapFavorites = useCallback(() => {
-        return favoriteRestaurants.map(singleRestaurant => {
-            return (
-                <div className="card" key={singleRestaurant.name}>
-                    <RestaurantCard restaurant={singleRestaurant} displayChef={true} color={colors.light_tan} key={singleRestaurant.name} isSmall={false} />
-                </div>
-            );
-        });
+        if (favoriteRestaurants) {
+            const jsxArray = favoriteRestaurants.map((singleRestaurant, index) => {
+                const mappedValue = (
+                    <div className="card" key={index}>
+                        <RestaurantCard restaurant={singleRestaurant} displayChef={true} color={colors.light_tan} key={singleRestaurant.name} isSmall={false} />
+                    </div>
+                );
+                return mappedValue;
+            });
+            setMappedCards(jsxArray);
+        }
     }, [favoriteRestaurants])
 
     return (
         <StyledDiv>
             <h3>THE POPULAR RESTAURANT IN EPICURE:</h3>
             <WrapperDiv>
-                <div className="scrolling-wrapper">{mapFavorites()}</div>
+                <div className="scrolling-wrapper">{mappedCards}</div>
             </WrapperDiv>
 
             <div className="show-all">

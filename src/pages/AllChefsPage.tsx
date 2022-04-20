@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ChefCard from "../Components/ChefOfTheWeek/ChefCard";
-import { getChef } from "../mockDB/MockDB";
+import { chef } from "../mockDB/MockDB";
+import { getAllChefs } from "../service/service";
 
 
 const StyledDiv = styled.div`
@@ -10,9 +12,17 @@ const StyledDiv = styled.div`
 `
 
 const AllChefsPage: React.FC = () => {
-    const chefs = getChef();
+    const [allChef, setAllChefs] = useState<chef[]>([]);
+
+    useEffect(() => {
+        const waitForChefs = async () => {
+            const returnedVal = await getAllChefs();
+            setAllChefs(returnedVal);
+        }
+        waitForChefs();
+    }, [])
     const mapChefs = () => {
-        return chefs.map(chef => <ChefCard chef={chef} />)
+        return allChef.map(chef => <ChefCard chef={chef} />)
     }
     return (
         <StyledDiv>

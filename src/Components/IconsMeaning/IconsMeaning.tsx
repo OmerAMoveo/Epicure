@@ -76,9 +76,9 @@ const IconsMeanings: React.FC = () => {
         <StyledDiv>
             <h1>THE MEANING OF OUR ICONS :</h1>
             <div className="icons-container">
-                <img src={selectCommentIcon(Comment.spicy)} />
-                <img src={selectCommentIcon(Comment.vegeterian)} />
-                <img src={selectCommentIcon(Comment.vegan)} />
+                <img src={selectCommentIcon(Comment.spicy)} alt="spicy" />
+                <img src={selectCommentIcon(Comment.vegeterian)} alt="vegetarian" />
+                <img src={selectCommentIcon(Comment.vegan)} alt="vegan" />
             </div>
             <div className="text-container">
                 <p>spicy</p>
