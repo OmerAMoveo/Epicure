@@ -60,7 +60,6 @@ const HomePage: React.FC = () => {
                 {/* <ChefOfTheWeek /> */}
                 <AboutUs />
             </HomePageWrapper>
-
         </>
     );
 }

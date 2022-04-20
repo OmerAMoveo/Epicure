@@ -105,7 +105,6 @@ const FullRestaurant: React.FC = () => {
     const [timeSelected, setTimeSelected] = useState<Meal>(setCurrTime());
     const [displayedDishes, setDisplayedDishes] = useState<dish[]>([]);
 
-
     useEffect(() => {
         if (restaurant) setShowAll(!(dishDisplay))
     }, [restaurant]);
@@ -120,7 +119,6 @@ const FullRestaurant: React.FC = () => {
         setIsOpen(isRestaurantOpen(restaurant));
 
     }, [])
-
 
     const reduceDishesArray = useCallback((currMeal: Meal) => {
         const newDishArray: dish[] = [];
