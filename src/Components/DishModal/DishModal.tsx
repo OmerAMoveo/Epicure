@@ -214,7 +214,6 @@ const DishModal: React.FC = () => {
     const dispatch = useDispatch();
     const theDisplayedDish = useSelector((state: RootStateOrAny) => state.displayDish.dish);
     const cart = useSelector((state: RootStateOrAny) => state.auth.cart);
-    console.log(theDisplayedDish);
 
     const [displayedNumber, setDisplayedNumber] = useState(0);
     const [sideDish, setSideDish] = useState<string | null>(null)
@@ -291,11 +290,11 @@ const DishModal: React.FC = () => {
             </div>
             <h1>Choose a side</h1>
             <form >
-                {theDisplayedDish.sides.length ? InputCheckGenerator('radio', 'sides', 'sides', theDisplayedDish.sides, radioChangeHandler) : <div className="no-items"><p >No sides for this dish.</p></div>}
+                {theDisplayedDish.sides?.length ? InputCheckGenerator('radio', 'sides', 'sides', theDisplayedDish.sides, radioChangeHandler) : <div className="no-items"><p >No sides for this dish.</p></div>}
             </form>
             <h1>Changes</h1>
             <form>
-                {theDisplayedDish.changes.length ? InputCheckGenerator('checkbox', 'changes', 'changes', theDisplayedDish.changes, checkBoxChangeHandler) : <div className="no-items"><p>No changes for this dish.</p></div>}
+                {theDisplayedDish.changes?.length ? InputCheckGenerator('checkbox', 'changes', 'changes', theDisplayedDish.changes, checkBoxChangeHandler) : <div className="no-items"><p>No changes for this dish.</p></div>}
             </form>
             <h1>Quantity</h1>
             <span className="quantity">

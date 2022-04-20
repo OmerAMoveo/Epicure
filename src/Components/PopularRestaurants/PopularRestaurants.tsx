@@ -81,14 +81,16 @@ const PopularRestaurants: React.FC = () => {
     const [favoriteRestaurants, setFavoriteRestaurants] = useState<restaurant[] | null>(null);
     const [mappedCards, setMappedCards] = useState([<></>]);
     useEffect(() => {
-        const getPopular = async () => {
+        (async () => {
             const populars = await getPopularRestaurants();
-            console.log(populars);
             setFavoriteRestaurants(populars);
-        }
-        getPopular();
+        })();
+        // const getPopular = async () => {
+        //     const populars = await getPopularRestaurants();
+        //     setFavoriteRestaurants(populars);
+        // }
+        // getPopular();
     }, [])
-    console.log(favoriteRestaurants);
 
     useEffect(() => {
         if (favoriteRestaurants) {

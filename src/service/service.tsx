@@ -233,10 +233,8 @@ export const getRestaurantByName = async (resName: string) => {
 
 export const getPopularRestaurants = async () => {
     const url = RESTAURANT_URL + 'getPopular/';
-    console.log('here!!');
     const res = await network.get(url);
     const returnedVal: restaurant[] = parseRestaurantToArray(res.data);
-    console.log(res.data);
 
     return returnedVal;
 }

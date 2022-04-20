@@ -93,6 +93,7 @@ const StyledDiv = styled.div`
 const FullRestaurant: React.FC = () => {
 
     const { restaurantParam } = useParams();
+    console.log(restaurantParam);
 
     const dishDisplay = useSelector((state: RootStateOrAny) => state.displayDish.toShowDish);
     const allDishes: dish[] = useSelector((state: RootStateOrAny) => state.displayDish.allDishes)
@@ -106,18 +107,20 @@ const FullRestaurant: React.FC = () => {
 
 
     useEffect(() => {
-        setShowAll(!(dishDisplay))
-    }, [dishDisplay]);
+        if (restaurant) setShowAll(!(dishDisplay))
+    }, [restaurant]);
 
     useEffect(() => {
-        const getRestaurant = async () => {
+
+        (async () => {
             const returnedVal = await getRestaurantByName(restaurantParam ? restaurantParam : '');
-            if (returnedVal)
-                setRestaurant(returnedVal)
-        }
-        getRestaurant();
+            if (returnedVal) setRestaurant(returnedVal)
+        })();
+
         setIsOpen(isRestaurantOpen(restaurant));
+
     }, [])
+
 
     const reduceDishesArray = useCallback((currMeal: Meal) => {
         const newDishArray: dish[] = [];
